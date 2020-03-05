@@ -6,10 +6,10 @@ import java.io.InputStreamReader;
 public class CommandController {
     private Interpretator interpretator;
 
-    public void start(TableManager currentTable){
+    public void start(){
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-            interpretator = new CommandInterpretator(currentTable);
+            interpretator = new CommandInterpretator(TableController.getCurrentTable());
             String line = reader.readLine();
             while (!"exit".equals(line)){
                 interpretator.handle(line.split(","));
