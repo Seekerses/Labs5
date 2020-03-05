@@ -12,7 +12,7 @@ public class CommandController {
             interpretator = new CommandInterpretator(currentTable);
             String line = reader.readLine();
             while (!"exit".equals(line)){
-                interpretator.handle(line.split(" "));
+                interpretator.handle(line.split(","));
                 line = reader.readLine();
             }
             reader.close();
