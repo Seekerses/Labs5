@@ -18,15 +18,16 @@ public class CommandInterpretator implements Interpretator{
         CommandSave commandSave = new CommandSave(table);
         CommandShow commandShow = new CommandShow(table);
         CommandAdd commandAdd = new CommandAdd(table);
+        Commandmin_by_name commandmin = new Commandmin_by_name(table);
 
         commands.put("help",commandHelp);
         commands.put("info",commandInfo);
         commands.put("clear",commandClear);
         commands.put("save",commandSave);
-        commands.put("add",commandAdd);
         commands.put("show",commandShow);
         commands.put("history",commandHistory);
-        commands.put("update id",commandAdd);
+        commands.put("insert key",commandAdd);
+        commands.put("min_by_name",commandmin);
     }
 
     public void setCommands(Map<String, Command> commandslist) {
