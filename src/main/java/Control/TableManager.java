@@ -5,6 +5,7 @@ import java.io.BufferedOutputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Hashtable;
 import java.util.Map;
 //reciever
@@ -65,4 +66,9 @@ public class TableManager {
     public Iterable<? extends Map.Entry> getSet() {
         return table.entrySet();
     }
+
+    public Collection<Product> getProducts(){
+        return table.values();
+    }
+
 }
