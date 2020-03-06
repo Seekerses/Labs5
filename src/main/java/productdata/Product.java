@@ -112,9 +112,9 @@ public class Product {
     }
 
     public String out(){
-        return id.toString() + ";" + name + ";" + coordinates.toString() + ";" + manufacturer.getPostalAddress() + ";" +
+        return id.toString() + ";" + name + ";" + coordinates.output() + ";" + manufacturer.getPostalAddress() + ";" +
                 manufacturer.getName() + ";" + manufacturer.getFullName() + ";" + manufacturer.getType() + ";" +
-                unitOfMeasure.toString();
+                unitOfMeasure.toString() + ";" + creationDate.toString() + ";" + price.toString();
     }
 
     public String getName() {

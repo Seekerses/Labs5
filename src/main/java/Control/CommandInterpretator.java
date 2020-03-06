@@ -20,6 +20,7 @@ public class CommandInterpretator implements Interpretator{
         CommandAdd commandAdd = new CommandAdd(table);
         Commandmin_by_name commandmin = new Commandmin_by_name(table);
         CommandRemove commandRemove = new CommandRemove(table);
+        CommandExit commandExit = new CommandExit();
 
         commands.put("help",commandHelp);
         commands.put("info",commandInfo);
@@ -31,6 +32,7 @@ public class CommandInterpretator implements Interpretator{
         commands.put("insert key",commandAdd);
         commands.put("min_by_name",commandmin);
         commands.put("remove_key",commandRemove);
+        commands.put("exit",commandExit);
     }
 
     public void setCommands(Map<String, Command> commandslist) {
@@ -42,7 +44,7 @@ public class CommandInterpretator implements Interpretator{
     }
 
     @Override
-    public void handle(String[] args) throws FileNotFoundException {
+    public void handle(String[] args) {
         if (commands.containsKey(args[0])) {
             try {
                 commands.get(args[0]).execute();
