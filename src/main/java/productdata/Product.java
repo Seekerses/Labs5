@@ -1,10 +1,10 @@
 package productdata;
 import java.io.BufferedReader;
-import java.io.PrintStream;
+import java.io.IOException;
 import java.time.LocalDateTime;
 
 public class Product {
-    static long idCounter;
+    private static long idCounter;
     private Long id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
     private Coordinates coordinates; //Поле не может быть null
@@ -15,24 +15,31 @@ public class Product {
 
 
     public Product(BufferedReader reader) {
-        try {
             idCounter++;
             id = idCounter;
 
             System.out.println("Введите имя продукта:");
             while (name == null) {
-                name = reader.readLine();
-                if (name == null) {
+                try {
+                    name = reader.readLine();
+                }
+                catch (IOException e){
+                    System.out.println(" Введено некорректное значение.");
+                }
+                if ("".equals(name)) {
                     System.out.println("Ошибка: введено пустое значение. Введите имя продукта:");
+                    name = null;
                 }
             }
             System.out.println("Введите цену:");
             while (price == null) {
-                this.price = Float.parseFloat(reader.readLine());
-                if (price == null) {
-                    System.out.println("Ошибка: введено пустое значение. Введите единицы массы:");
+                try {
+                    this.price = Float.parseFloat(reader.readLine());
                 }
-                if(price <0f){
+                catch (Exception e){
+                    System.out.println("Введего некорректное значение.");
+                }
+                if (price != null && price < 0f) {
                     System.out.println("Ошибка: цена не может быть отрицательной. Введите цену:");
                     price = null;
                 }
@@ -45,61 +52,51 @@ public class Product {
                     "    PCS,\n" +
                     "    LITERS,\n" +
                     "    MILLILITERS;");
+
             while (unitOfMeasure == null) {
-                this.unitOfMeasure = UnitOfMeasure.valueOf(reader.readLine().toUpperCase());
-                if (unitOfMeasure == null) {
-                    System.out.println("Ошибка: введено пустое значение. Введите единицы массы:");
+                try {
+                    this.unitOfMeasure = UnitOfMeasure.valueOf(reader.readLine().toUpperCase());
+                }
+                catch (Exception e ){
+                    System.out.println("Ошибка: введено неккоректное значение. Введите единицы массы:");
                 }
             }
-            manufacturer = new Organization(reader);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static class ProductBuilder{
-        private Long id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
-        private String name; //Поле не может быть null, Строка не может быть пустой
-        private Coordinates coordinates; //Поле не может быть null
-        private java.time.LocalDateTime creationDate = LocalDateTime.now(); //Поле не может быть null, Значение этого поля должно генерироваться автоматически
-        private Float price; //Поле может быть null, Значение поля должно быть больше 0
-        private UnitOfMeasure unitOfMeasure; //Поле не может быть null
-        private Organization manufacturer;
-
-        public ProductBuilder buildName(String name){
-            this.name = name;
-            return this;
-        }
-        public ProductBuilder buildCoordinates(Coordinates coordinates){
-            this.coordinates = coordinates;
-            return this;
-        }
-        private ProductBuilder buildCreationDate(LocalDateTime date){
-            this.creationDate = date;
-            return this;
-        }
-        public ProductBuilder buildPrice(Float price){
-            this.price = price;
-            return this;
-        }
-        public ProductBuilder buildMeasure(UnitOfMeasure unitOfMeasure){
-            this.unitOfMeasure = unitOfMeasure;
-            return this;
-        }
-        public ProductBuilder buildOrg(Organization org){
-            this.manufacturer = org;
-            return this;
-        }
-
-        public Product build(){
+            System.out.println("Ввести данные о производителе ? \n yes \n any words to no");
             try {
-                return new Product(name, coordinates, price, unitOfMeasure, manufacturer);
+                if(reader.readLine().equals("yes")) {
+                    while (true) {
+                        System.out.println("Назначить из существующих ? \n yes \n any words to no");
+                        try {
+                            if (reader.readLine().equals("yes")) {
+                                String key;
+                                System.out.println("Выберите из списка : ");
+                                UniqueController.getOrgTable().forEach((k, v) -> System.out.println(k));
+                                try {
+                                    key = reader.readLine();
+                                } catch (Exception e) {
+                                    System.out.println("Ошибка: введено некорректное значение.");
+                                    continue;
+                                }
+                                try {
+                                    manufacturer = UniqueController.get(key);
+                                    break;
+                                }
+                                catch (Exception e){
+                                    System.out.println("Такой компании нет в списке");
+                                }
+                            }
+                            else {
+                                break;
+                            }
+                        } catch (Exception e) {
+                            System.out.println("Ошибка: введено некорректное значение.");
+                        }
+                    }
+                }
             }
             catch (Exception e){
-                e.printStackTrace();
-                return null;
+                System.out.println("Ошибка: введено некорректное значение.");
             }
-        }
     }
 
     public Product(String name, Coordinates coordinates, Float price, UnitOfMeasure unitOfMeasure, Organization organization) throws Exception {

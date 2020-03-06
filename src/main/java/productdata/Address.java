@@ -1,24 +1,32 @@
 package productdata;
 import java.io.BufferedReader;
-import java.time.LocalDateTime;
+import java.io.IOException;
 
 public class Address {
     private String street; //Поле не может быть null
     private Location town; //Поле может быть null
 
-    public Address(BufferedReader reader) {
-        try {
+    Address(BufferedReader reader) {
             System.out.println("Введите улицу: ");
             while (street == null) {
-                street = reader.readLine();
+                try {
+                    street = reader.readLine();
+                }
+                catch (IOException e){
+                    System.out.println("Ошибка: введено некорректное значение. Введите улицу:");
+                }
                 if (street == null) {
                     System.out.println("Ошибка: введено пустое значение. Введите улицу:");
                 }
-
             }
-            town = new Location(reader);
-        } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Ввести город ? \n yes \n any words to no");
+        try {
+            if(reader.readLine().equals("yes")) {
+                town = new Location(reader);
+            }
+        }
+        catch (IOException e){
+            System.out.println("Ошибка: введено некорректное значение.");
         }
     }
 
@@ -26,11 +34,6 @@ public class Address {
         if(street == null) throw new NullPointerException();
         this.street = street;
         this.town = town;
-    }
-
-    public Address(String street) {
-        if(street == null) throw new NullPointerException();
-        this.street = street;
     }
 
     @Override

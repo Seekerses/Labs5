@@ -25,6 +25,7 @@ public class CommandInterpretator implements Interpretator{
         commands.put("clear",commandClear);
         commands.put("save",commandSave);
         commands.put("show",commandShow);
+        commands.put("add",commandAdd);
         commands.put("history",commandHistory);
         commands.put("insert key",commandAdd);
         commands.put("min_by_name",commandmin);

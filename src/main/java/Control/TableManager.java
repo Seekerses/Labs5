@@ -22,7 +22,6 @@ public class TableManager {
 
     public void put(String index, Product product){
         table.put(index,product);
-        table.forEach((k,v) -> System.out.println(v.toString()));
     }
 
     public Product get(String index){
@@ -34,7 +33,7 @@ public class TableManager {
     }
 
     public void save() throws FileNotFoundException {
-        FileOutputStream fos = new FileOutputStream("C:\\projects\\kurs1\\Prog\\Laba\\src\\main\\resources\\saved.csv");
+        FileOutputStream fos = new FileOutputStream("C:\\Users\\seeke\\Desktop\\Saved.csv");
         String text= "";
         for (Map.Entry<String, Product> entry : table.entrySet()) {
 

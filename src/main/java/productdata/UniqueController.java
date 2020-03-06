@@ -15,4 +15,8 @@ public class UniqueController {
     public static Organization get(String index){
         return orgTable.get(index);
     }
+
+    public static Hashtable<String, Organization> getOrgTable(){
+        return orgTable;
+    }
 }
