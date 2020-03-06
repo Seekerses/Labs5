@@ -1,9 +1,8 @@
 package cmpr;
 
-import cmpr.Comparator;
 import productdata.Organization;
 
-public class OrganizationIDComparator implements Comparator<Organization> {
+public class OrganizationIDComparator implements IDComparator<Organization> {
     @Override
     public int compare(Organization a, Organization b) {
         if(a.getId()> b.getId())

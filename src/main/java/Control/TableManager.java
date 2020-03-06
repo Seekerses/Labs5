@@ -12,7 +12,7 @@ import java.util.Map;
 //reciever
 public class TableManager {
     private Hashtable<String, Product> table;
-    private java.time.LocalDateTime creationDate;
+    private java.time.LocalDateTime Date;
 
     public TableManager(){
         table = new Hashtable<>();
@@ -35,7 +35,7 @@ public class TableManager {
     }
 
     public void save() throws FileNotFoundException {
-        FileOutputStream fos = new FileOutputStream("C:\\Users\\seeke\\Desktop\\Saved.csv");
+        FileOutputStream fos = new FileOutputStream("C:\\projects\\kurs1\\Prog\\Laba\\src\\main\\resources\\Saved.csv");
         String text= "";
         for (Map.Entry<String, Product> entry : table.entrySet()) {
 
@@ -72,7 +72,8 @@ public class TableManager {
         return table.values();
     }
 
-    public LocalDateTime getCreationDate() {
-        return creationDate;
+    public String getCreationDate() {
+        Date = LocalDateTime.now();
+        return Date.toString();
     }
 }
