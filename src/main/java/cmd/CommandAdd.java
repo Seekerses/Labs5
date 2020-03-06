@@ -1,4 +1,5 @@
 package cmd;
+import Control.Initislizator;
 import Control.TableManager;
 import productdata.Product;
 
@@ -15,13 +16,17 @@ public class CommandAdd implements Command{
 
     @Override
     public void execute(String[] args) {
-        System.out.println(" Ведите ключ продукта : ");
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        try {
-            hashtable.put(reader.readLine(), new Product(reader));
+        if (args.length == 0) {
+            System.out.println(" Ведите ключ продукта : ");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            try {
+                hashtable.put(reader.readLine(), new Product(reader));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-        catch (Exception e){
-            e.printStackTrace();
+        else{
+            Initislizator.build(hashtable,args);
         }
     }
 
