@@ -14,7 +14,7 @@ public class CommandAdd implements Command{
     }
 
     @Override
-    public void execute() {
+    public void execute(String[] args) {
         System.out.println(" Ведите ключ продукта : ");
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         try {

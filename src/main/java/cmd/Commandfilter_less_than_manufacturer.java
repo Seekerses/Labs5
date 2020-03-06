@@ -13,7 +13,7 @@ public class Commandfilter_less_than_manufacturer implements Command{
     }
 
     @Override
-    public void execute() throws FileNotFoundException {
+    public void execute(String[] args) throws FileNotFoundException {
         //Comparator<Organization> comp = new OrganizationIDComparator().compare();
     }
 }

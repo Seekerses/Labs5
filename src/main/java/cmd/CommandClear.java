@@ -11,7 +11,7 @@ public class CommandClear implements Command {
     }
 
     @Override
-    public void execute() {
+    public void execute(String[] args) {
         hashtable.clear();
     }
 

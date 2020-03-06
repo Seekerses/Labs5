@@ -13,7 +13,7 @@ public class Commandmin_by_name implements Command {
     }
 
     @Override
-    public void execute() {
+    public void execute(String[] args) {
         String min = "";
         int i =1;
         Product p = null;
