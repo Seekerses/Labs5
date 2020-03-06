@@ -35,7 +35,7 @@ public class TableManager {
     }
 
     public void save() throws FileNotFoundException {
-        FileOutputStream fos = new FileOutputStream("C:\\projects\\kurs1\\Prog\\Laba\\src\\main\\resources\\Saved.csv");
+        FileOutputStream fos = new FileOutputStream("C:\\Users\\seeke\\Desktop\\Saved.csv");
         String text= "";
         for (Map.Entry<String, Product> entry : table.entrySet()) {
 
@@ -47,6 +47,7 @@ public class TableManager {
             bos.write(buffer, 0, buffer.length);
             bos.flush();
             bos.close();
+            System.out.println("Save complete...");
         } catch(IOException e) {
             System.out.println(e.getMessage());
         }
