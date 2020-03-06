@@ -1,25 +1,39 @@
 package productdata;
 import java.io.BufferedReader;
+import java.io.IOException;
 
 public class Coordinates {
     private double x;
     private Integer y; //Значение поля должно быть больше -150, Поле не может быть null
 
-    public Coordinates(BufferedReader reader){
-        try {
+    Coordinates(BufferedReader reader){
             System.out.println("Введите координаты организации. Введите координату x:");
-            x = Double.parseDouble(reader.readLine());
+            while (true){
+                try {
+                    x = Double.parseDouble(reader.readLine());
+                    break;
+                } catch (NumberFormatException e) {
+                    System.out.println("Ошибка: введено некорректное значение");
+                } catch (IOException e) {
+                    System.out.println("Ошибка: введено некорректное значение.");
+                }
+            }
             System.out.println("Введите координату y:");
             while (y == null) {
-                y = Integer.parseInt(reader.readLine());
-                if (y == null)System.out.println("Ошибка: введено пустое значение. ВВедите координату y:");
-                if (y < -150)System.out.println("Ошибка: число выходит за диапазон. ВВедите координату y > -150:");
+                try {
+                    y = Integer.parseInt(reader.readLine());
+                }
+                catch (Exception e) {
+                    System.out.println("Ошибка: введено некорректное значение");
+                    continue;
+                }
+                if (y < -150){
+                    System.out.println("Ошибка: число выходит за диапазон. Введите координату y > -150:");
+                    y = null;
+                }
             }
         }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+
 
     public Coordinates(double x, Integer y)throws Exception{
         if (y == null) throw new NullPointerException();
