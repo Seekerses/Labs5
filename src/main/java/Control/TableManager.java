@@ -5,12 +5,14 @@ import java.io.BufferedOutputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Hashtable;
 import java.util.Map;
 //reciever
 public class TableManager {
     private Hashtable<String, Product> table;
+    private java.time.LocalDateTime creationDate;
 
     public TableManager(){
         table = new Hashtable<>();
@@ -71,4 +73,7 @@ public class TableManager {
         return table.values();
     }
 
+    public LocalDateTime getCreationDate() {
+        return creationDate;
+    }
 }

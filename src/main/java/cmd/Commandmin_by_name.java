@@ -32,7 +32,6 @@ public class Commandmin_by_name implements Command {
         }else{System.out.println("Empty table!");}
     }
 
-    @Override
     public String toString() {
         return "min_by_name";
     }

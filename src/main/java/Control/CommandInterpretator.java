@@ -42,8 +42,8 @@ public class CommandInterpretator implements Interpretator{
     public void handle(String[] args){
         if (commands.containsKey(args[0])){
             try {
-                commandHistory.push(commands.get(args[0]));
                 commands.get(args[0]).execute();
+                commandHistory.pushStack(commands.get(args[0]));
             }
             catch (FileNotFoundException e){
                 e.printStackTrace();

@@ -13,7 +13,8 @@ public class CommandInfo implements Command {
     @Override
     public void execute() {
         System.out.println("Size of collection: " + hashtable.getSize() + "\n"
-        + "Type of collection: " + hashtable.getType() + "\n");
+        + "Type of collection: " + hashtable.getType() + "\n" +
+                "Date of creation: " + hashtable.getCreationDate());
 
     }
 
