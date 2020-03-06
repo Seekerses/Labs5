@@ -3,6 +3,9 @@ import cmd.*;
 
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 //client
@@ -20,7 +23,7 @@ public class CommandInterpretator implements Interpretator{
         CommandAdd commandAdd = new CommandAdd(table);
         Commandmin_by_name commandmin = new Commandmin_by_name(table);
         CommandRemove commandRemove = new CommandRemove(table);
-        CommandExit commandExit = new CommandExit();
+        CommandExecute_Script commandExecute_script = new CommandExecute_Script();
 
         commands.put("help",commandHelp);
         commands.put("info",commandInfo);
@@ -32,7 +35,7 @@ public class CommandInterpretator implements Interpretator{
         commands.put("insert key",commandAdd);
         commands.put("min_by_name",commandmin);
         commands.put("remove_key",commandRemove);
-        commands.put("exit",commandExit);
+        commands.put("execute_script",commandExecute_script);
     }
 
     public void setCommands(Map<String, Command> commandslist) {
@@ -44,11 +47,18 @@ public class CommandInterpretator implements Interpretator{
     }
 
     @Override
-    public void handle(String[] args) {
+    public void handle(String[] args) throws IOException {
         if (commands.containsKey(args[0])) {
             try {
-                commands.get(args[0]).execute();
-                commandHistory.addCommand(commands.get(args[0]).toString());
+                    ArrayList<String> arguments;
+                    if(args.length > 1) {
+                        arguments = new ArrayList<>(Arrays.asList(args));
+                        arguments.remove(0);
+                    }
+
+                    else arguments = null;
+                    commands.get(args[0]).execute(arguments == null ? null : arguments.toArray(new String[0]));
+                    commandHistory.addCommand(commands.get(args[0]).toString());
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }

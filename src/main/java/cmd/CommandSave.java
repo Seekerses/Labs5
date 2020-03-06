@@ -11,7 +11,7 @@ public class CommandSave implements Command {
     }
 
     @Override
-    public void execute() throws FileNotFoundException {
+    public void execute(String[] args) throws FileNotFoundException {
         hashtable.save();
     }
 

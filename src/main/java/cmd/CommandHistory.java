@@ -10,7 +10,7 @@ public class CommandHistory implements Command{
         history.add(name);
     }
 
-    public void execute() {
+    public void execute(String[] args) {
         System.out.println(history.subList(Math.max(history.size() - 7, 0), history.size()));
     }
 

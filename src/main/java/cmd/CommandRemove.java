@@ -12,7 +12,7 @@ public class CommandRemove implements Command {
     }
 
     @Override
-    public void execute() {
+    public void execute(String[] args) {
         table.remove(key);
     }
 

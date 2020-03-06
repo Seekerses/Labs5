@@ -4,7 +4,7 @@ import java.util.List;
 public class CommandHelp implements Command {
 
     @Override
-    public void execute(){
+    public void execute(String[] args){
 
         System.out.println("help : вывести справку по доступным командам\n" +
                 "info : вывести в стандартный поток вывода информацию о коллекции (тип, дата инициализации, количество элементов и т.д.)\n" +
