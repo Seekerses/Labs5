@@ -1,11 +1,12 @@
 package cmpr;
 
 import cmpr.NameComparator;
+import productdata.Product;
 
-public class ProductNameComparator implements NameComparator<String> {
+public class ProductNameComparator implements NameComparator<Product> {
 
     @Override
-    public int compare(String a, String b) {
-        return a.compareTo(b);
+    public int compare(Product a, Product b) {
+        return a.getName().compareTo(b.getName());
     }
 }

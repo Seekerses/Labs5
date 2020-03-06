@@ -7,17 +7,16 @@ public class CommandRemove implements Command {
     private TableManager table;
     private String key;
 
-    public CommandRemove(TableManager table, String key){
+    public CommandRemove(TableManager table){
         this.table=table;
-        this.key=key;
     }
 
     @Override
-    public void execute() throws FileNotFoundException {
+    public void execute() {
         table.remove(key);
     }
 
     public String toString(){
-        return "remove";
+        return "remove_key";
     }
 }

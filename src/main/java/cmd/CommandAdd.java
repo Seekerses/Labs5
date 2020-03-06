@@ -27,6 +27,6 @@ public class CommandAdd implements Command{
 
     @Override
     public String toString() {
-        return "update id";
+        return "insert key";
     }
 }

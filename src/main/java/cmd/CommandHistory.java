@@ -1,27 +1,17 @@
 package cmd;
-import java.io.FileNotFoundException;
-import java.util.Stack;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 public class CommandHistory implements Command{
-    private Stack<Command> history = new Stack<>();
+    private static List<String> history = new ArrayList<String>();
 
-    public void push(Command c) {
-        history.push(c);
+    public void addCommand(String name) {
+        history.add(name);
     }
 
-    public Command pop() {
-        return history.pop();
-    }
-
-    public boolean isEmpty() { return history.isEmpty(); }
-
-    @Override
-    public void execute() throws FileNotFoundException {
-        for(int i=0;i<=history.size();i++){
-            System.out.println(history.peek().toString());
-            history.pop();
-            if(i==6){break;}
-        }
+    public void execute() {
+        System.out.println(history.subList(Math.max(history.size() - 7, 0), history.size()));
     }
 
     public String toString(){

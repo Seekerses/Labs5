@@ -123,9 +123,13 @@ public class Product {
 
     @Override
     public String toString() {
-        return ("ID продукта: " + id + " \nИмя продукта: " + name + " \nКоординаты продукта: "
+        return ("ID продукта: " + id + " \nProduct name: " + name + " \nКоординаты продукта: "
                 + coordinates.toString() + " \nДата создания : " + creationDate.toString()
                 + " \nЦена продукта : " + (price == null ? "не указано":price.toString())+ " \nЕдиницы измерения : "
                 + unitOfMeasure.toString() + " \nПроизводит : " + (manufacturer == null ? "не указано" : manufacturer.toString()));
+    }
+
+    public Long getId() {
+        return id;
     }
 }
