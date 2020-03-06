@@ -14,6 +14,6 @@ public class CommandUpdate implements Command {
 
     @Override
     public void execute() {
-        
+
     }
 }
