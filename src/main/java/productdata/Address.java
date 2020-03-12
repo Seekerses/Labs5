@@ -38,7 +38,7 @@ public class Address {
 
     @Override
     public String toString(){
-        return (street + "," + (town == null ? "не указано": town.toString()));
+        return (street + "," + (town == null ? "не указано": town.output()));
     }
 
 }

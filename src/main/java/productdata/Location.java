@@ -58,4 +58,8 @@ public class Location {
     public String toString(){
         return ("x = " + x + " y = " + y + " z = " + z);
     }
+
+    public String output(){
+        return x + ";" + y + ";" + z;
+    }
 }

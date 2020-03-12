@@ -1,4 +1,4 @@
-package productdata;
+package cmd;
 
 import Control.TableManager;
 import cmd.Command;

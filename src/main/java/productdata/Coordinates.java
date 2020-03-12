@@ -46,4 +46,8 @@ public class Coordinates {
     public String toString(){
         return (" x = " + x + " y = " + y);
     }
+
+    public String output(){
+        return x + ";" + y;
+    }
 }
