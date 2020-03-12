@@ -86,6 +86,7 @@ public class Product {
                                 }
                             }
                             else {
+                                manufacturer = new Organization(reader);
                                 break;
                             }
                         } catch (Exception e) {
@@ -99,22 +100,37 @@ public class Product {
             }
     }
 
-    public Product(String name, Coordinates coordinates, Float price, UnitOfMeasure unitOfMeasure, Organization organization) throws Exception {
-        idCounter++;
-        id = idCounter;
+    public Product(Long id,String name, Coordinates coordinates, Float price, UnitOfMeasure unitOfMeasure, Organization organization,LocalDateTime data) throws Exception {
+        if (id == null ) {
+            idCounter++;
+            this.id = idCounter;
+        }
+        else
+        {
+            this.id = id;
+        }
         if (name == null || coordinates == null || unitOfMeasure == null) throw new NullPointerException();
         if (price < 0) throw new Exception("Цена не может быть меньше 0");
         this.name = name;
+        this.price = price;
         this.coordinates = coordinates;
-        creationDate = LocalDateTime.now();
+        if (data == null) {
+            creationDate = LocalDateTime.now();
+        }
+        else {
+            creationDate = data;
+        }
         this.unitOfMeasure = unitOfMeasure;
         this.manufacturer = organization;
     }
 
     public String out(){
-        return id.toString() + ";" + name + ";" + coordinates.output() + ";" + manufacturer.getPostalAddress() + ";" +
-                manufacturer.getName() + ";" + manufacturer.getFullName() + ";" + manufacturer.getType() + ";" +
-                unitOfMeasure.toString() + ";" + creationDate.toString() + ";" + price.toString();
+        return id.toString() + ";" + name + ";" + coordinates.output() + ";" +
+                (manufacturer == null ? ";;;;;;;":manufacturer.getId() + ";" +
+                        (manufacturer.getPostalAddress() == null ? ";;;" : manufacturer.getPostalAddress())
+                        + ";" + manufacturer.getName() + ";" + manufacturer.getFullName() + ";"
+                        + (manufacturer.getType() == null?"":manufacturer.getType())) + ";" +
+                unitOfMeasure.toString() + ";" + creationDate.toString() + ";" + (price == null ? "":price.toString());
     }
 
     public String getName() {

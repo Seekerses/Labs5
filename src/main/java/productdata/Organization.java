@@ -79,12 +79,17 @@ public class Organization {
         UniqueController.put(this.fullName,this);
     }
 
-    public Organization(String name, String fullName, OrganizationType type, Address postalAddress) throws Exception{
+    public Organization(Integer id,String name, String fullName, OrganizationType type, Address postalAddress) throws Exception{
         if (name == null || fullName == null) throw new NullPointerException();
         if (fullName.length() >1404) throw new Exception("Too large full name");
         if (UniqueController.check(fullName)) throw new Exception("Not unique full name");
-        orgId++;
-        id = orgId;
+        if (id == null) {
+            orgId++;
+            this.id = orgId;
+        }
+        else{
+            this.id = id;
+        }
         this.name = name;
         this.fullName = fullName;
         this.type = type;
@@ -106,11 +111,11 @@ public class Organization {
     }
 
     public String getPostalAddress() {
-        return postalAddress.toString();
+        return postalAddress == null ? null : postalAddress.toString();
     }
 
     public String getType(){
-        return type.toString();
+        return type == null ? null : type.toString();
     }
 
     @Override
