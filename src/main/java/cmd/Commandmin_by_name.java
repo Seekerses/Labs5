@@ -1,4 +1,5 @@
 package cmd;
+import Control.TableController;
 import Control.TableManager;
 import productdata.Product;
 
@@ -6,18 +7,13 @@ import java.util.Iterator;
 import java.util.Map;
 
 public class Commandmin_by_name implements Command {
-    private TableManager table;
-
-    public Commandmin_by_name(TableManager table) {
-        this.table = table;
-    }
 
     @Override
     public void execute(String[] args) {
         String min = "";
         int i =1;
         Product p = null;
-        for (Product prod : table.getProducts()) {
+        for (Product prod : TableController.getCurrentTable().getProducts()) {
             if(i==1){min=prod.getName();}
             if(i!=0) {
                 if (min.compareTo(prod.getName()) >= 0) {

@@ -1,18 +1,14 @@
 package cmd;
+import Control.TableController;
 import Control.TableManager;
 
 import java.util.Hashtable;
 
 public class CommandClear implements Command {
-    private TableManager hashtable;
-
-    public CommandClear(TableManager hashtable){
-        this.hashtable=hashtable;
-    }
 
     @Override
     public void execute(String[] args) {
-        hashtable.clear();
+        TableController.getCurrentTable().clear();
     }
 
     public String toString(){

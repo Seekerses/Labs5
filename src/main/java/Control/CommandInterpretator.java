@@ -13,16 +13,16 @@ public class CommandInterpretator implements Interpretator{
     private Map<String, Command> commands;
     private CommandHistory commandHistory = new CommandHistory();
 
-    public CommandInterpretator(TableManager table){
+    public CommandInterpretator(){
         commands = new HashMap<>();
         CommandHelp commandHelp = new CommandHelp();
-        CommandInfo commandInfo = new CommandInfo(table);
-        CommandClear commandClear = new CommandClear(table);
-        CommandSave commandSave = new CommandSave(table);
-        CommandShow commandShow = new CommandShow(table);
-        CommandAdd commandAdd = new CommandAdd(table);
-        Commandmin_by_name commandmin = new Commandmin_by_name(table);
-        CommandRemove commandRemove = new CommandRemove(table);
+        CommandInfo commandInfo = new CommandInfo();
+        CommandClear commandClear = new CommandClear();
+        CommandSave commandSave = new CommandSave();
+        CommandShow commandShow = new CommandShow();
+        CommandAdd commandAdd = new CommandAdd();
+        Commandmin_by_name commandMin = new Commandmin_by_name();
+        CommandRemove commandRemove = new CommandRemove();
         CommandExecute_Script commandExecute_script = new CommandExecute_Script();
         CommandExit commandExit = new CommandExit();
 
@@ -34,7 +34,7 @@ public class CommandInterpretator implements Interpretator{
         commands.put("add",commandAdd);
         commands.put("history",commandHistory);
         commands.put("insert key",commandAdd);
-        commands.put("min_by_name",commandmin);
+        commands.put("min_by_name",commandMin);
         commands.put("remove_key",commandRemove);
         commands.put("execute_script",commandExecute_script);
         commands.put("exit",commandExit);
@@ -57,8 +57,8 @@ public class CommandInterpretator implements Interpretator{
                         arguments = new ArrayList<>(Arrays.asList(args));
                         arguments.remove(0);
                     }
-
                     else arguments = null;
+
                     commands.get(args[0]).execute(arguments == null ? null : arguments.toArray(new String[0]));
                     commandHistory.addCommand(commands.get(args[0]).toString());
             } catch (FileNotFoundException e) {

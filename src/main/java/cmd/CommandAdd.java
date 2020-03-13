@@ -1,5 +1,6 @@
 package cmd;
 import Control.Initislizator;
+import Control.TableController;
 import Control.TableManager;
 import productdata.Product;
 
@@ -8,11 +9,6 @@ import java.io.InputStreamReader;
 
 
 public class CommandAdd implements Command{
-    private TableManager hashtable;
-
-    public CommandAdd(TableManager hashtable){
-        this.hashtable=hashtable;
-    }
 
     @Override
     public void execute(String[] args) {
@@ -20,13 +16,13 @@ public class CommandAdd implements Command{
             System.out.println(" Ведите ключ продукта : ");
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
             try {
-                hashtable.put(reader.readLine(), new Product(reader));
+                TableController.getCurrentTable().put(reader.readLine(), new Product(reader));
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
         else{
-            Initislizator.build(hashtable,args);
+            Initislizator.build(TableController.getCurrentTable(),args);
         }
     }
 

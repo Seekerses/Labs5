@@ -12,7 +12,7 @@ public class ScriptParcer {
         BufferedReader buffReader = new BufferedReader(reader);
         String line;
         ArrayList<String[]> commands = new ArrayList<>();
-        CommandInterpretator itr = new CommandInterpretator(TableController.getCurrentTable());
+        CommandInterpretator itr = new CommandInterpretator();
 
         while ((line = buffReader.readLine()) != null){
             String[] cmd = line.split(" ");

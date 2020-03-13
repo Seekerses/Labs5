@@ -31,18 +31,26 @@ public class Product {
                     name = null;
                 }
             }
-            System.out.println("Введите цену:");
-            while (price == null) {
-                try {
-                    this.price = Float.parseFloat(reader.readLine());
-                }
-                catch (Exception e){
-                    System.out.println("Введего некорректное значение.");
-                }
-                if (price != null && price < 0f) {
-                    System.out.println("Ошибка: цена не может быть отрицательной. Введите цену:");
+            System.out.println("Ввести цену ?\n yes \n any words to no:");
+            try {
+                if ("yes".equals(reader.readLine())) {
+                    while (price == null) {
+                        try {
+                            this.price = Float.parseFloat(reader.readLine());
+                        } catch (Exception e) {
+                            System.out.println("Введего некорректное значение.");
+                        }
+                        if (price != null && price < 0f) {
+                            System.out.println("Ошибка: цена не может быть отрицательной. Введите цену:");
+                            price = null;
+                        }
+                    }
+                } else {
                     price = null;
                 }
+            }
+            catch (IOException e){
+                e.printStackTrace();
             }
             creationDate = LocalDateTime.now();
             coordinates = new Coordinates(reader);

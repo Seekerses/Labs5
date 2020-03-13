@@ -15,7 +15,9 @@ public class TableManager {
     private java.time.LocalDateTime Date;
 
     public TableManager(){
+
         table = new Hashtable<>();
+
     }
 
     public int getSize(){
@@ -36,14 +38,15 @@ public class TableManager {
 
     public void save() throws FileNotFoundException {
         FileOutputStream fos = new FileOutputStream("C:\\Users\\seeke\\Desktop\\Saved.csv");
-        String text= "";
+        StringBuilder text= new StringBuilder();
+        text.append(Date.toString()).append("\n");
         for (Map.Entry<String, Product> entry : table.entrySet()) {
 
-            text += entry.getKey() + ";" + entry.getValue().out() + "\n";
+            text.append(entry.getKey()).append(";").append(entry.getValue().out()).append("\n");
         }
         try {
             BufferedOutputStream bos = new BufferedOutputStream(fos);
-            byte[] buffer = text.getBytes();
+            byte[] buffer = text.toString().getBytes();
             bos.write(buffer, 0, buffer.length);
             bos.flush();
             bos.close();
@@ -74,7 +77,10 @@ public class TableManager {
     }
 
     public String getCreationDate() {
-        Date = LocalDateTime.now();
         return Date.toString();
+    }
+
+    void setCreationDate(LocalDateTime date){
+            Date = date;
     }
 }

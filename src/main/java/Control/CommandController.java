@@ -4,12 +4,10 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 public class CommandController {
-    private Interpretator interpretator;
 
-    public void start(){
+    public void start(Interpretator interpretator){
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-            interpretator = new CommandInterpretator(TableController.getCurrentTable());
             String line = reader.readLine();
             while (!"exit".equals(line)){
                 interpretator.handle(line.split(" "));

@@ -4,11 +4,9 @@ import Control.TableManager;
 import cmd.Command;
 
 public class CommandUpdate implements Command {
-    private TableManager table;
     private Long id;
 
-    public CommandUpdate(TableManager table,Long id){
-        this.table=table;
+    public CommandUpdate(Long id){
         this.id=id;
     }
 
