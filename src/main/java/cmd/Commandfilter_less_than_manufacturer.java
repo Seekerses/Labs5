@@ -17,7 +17,7 @@ public class Commandfilter_less_than_manufacturer implements Command{
     }
 
     @Override
-    public void execute() {
+    public void execute(String[] args) {
         IDComparator<Organization> comp = new OrganizationIDComparator();
 
 
@@ -28,7 +28,7 @@ public class Commandfilter_less_than_manufacturer implements Command{
 
         }else{
             System.out.println("Неправильный ввод. Попробуйте снова: ");
-            execute();
+            execute(args);
         }
     }
 }

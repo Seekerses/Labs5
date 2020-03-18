@@ -24,6 +24,7 @@ public class CommandInterpretator implements Interpretator{
         Commandmin_by_name commandmin = new Commandmin_by_name(table);
         CommandRemove commandRemove = new CommandRemove(table);
         CommandExecute_Script commandExecute_script = new CommandExecute_Script();
+        CommandExit commandExit = new CommandExit();
 
         commands.put("help",commandHelp);
         commands.put("info",commandInfo);
@@ -36,6 +37,7 @@ public class CommandInterpretator implements Interpretator{
         commands.put("min_by_name",commandmin);
         commands.put("remove_key",commandRemove);
         commands.put("execute_script",commandExecute_script);
+        commands.put("exit",commandExit);
     }
 
     public void setCommands(Map<String, Command> commandslist) {

@@ -7,7 +7,7 @@ import java.io.FileNotFoundException;
 public class CommandExit implements Command {
 
     @Override
-    public void execute() throws FileNotFoundException {
+    public void execute(String[] args){
         System.exit(0);
     }
 }
