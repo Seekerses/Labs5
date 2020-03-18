@@ -1,18 +1,14 @@
 package cmd;
+import Control.TableController;
 import Control.TableManager;
 
 import java.io.FileNotFoundException;
 
 public class CommandSave implements Command {
-    private TableManager hashtable;
-
-    public CommandSave(TableManager hashtable){
-        this.hashtable=hashtable;
-    }
 
     @Override
     public void execute(String[] args) throws FileNotFoundException {
-        hashtable.save();
+        TableController.getCurrentTable().save();
     }
 
     public String toString(){

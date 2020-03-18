@@ -1,20 +1,16 @@
 package cmd;
+import Control.TableController;
 import Control.TableManager;
 
 import java.util.Hashtable;
 
 public class CommandInfo implements Command {
-    private TableManager hashtable;
-
-    public CommandInfo(TableManager productHashtable){
-        this.hashtable=productHashtable;
-    }
 
     @Override
     public void execute(String[] args) {
-        System.out.println("Size of collection: " + hashtable.getSize() + "\n"
-        + "Type of collection: " + hashtable.getType() + "\n" +
-                "Date of creation: " + hashtable.getCreationDate());
+        System.out.println("Size of collection: " + TableController.getCurrentTable().getSize() + "\n"
+        + "Type of collection: " + TableController.getCurrentTable().getType() + "\n" +
+                "Date of creation: " + TableController.getCurrentTable().getCreationDate());
 
     }
 

@@ -1,7 +1,4 @@
-import Control.CommandController;
-import Control.Initislizator;
-import Control.TableController;
-import Control.TableManager;
+import Control.*;
 
 public class Main {
 
@@ -9,8 +6,7 @@ public class Main {
         TableManager prodTable = new TableManager();
         TableController.setCurrentTable(prodTable);
         Initislizator.init(prodTable,"C:\\Users\\seeke\\Desktop\\saved.csv");
-        //Fix bug of first element
         CommandController cmd = new CommandController();
-        cmd.start();
+        cmd.start(new CommandInterpretator());
     }
 }
