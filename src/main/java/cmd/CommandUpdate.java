@@ -33,6 +33,6 @@ public class CommandUpdate implements Command {
 
     @Override
     public String toString() {
-        return "update id";
+        return "update";
     }
 }
