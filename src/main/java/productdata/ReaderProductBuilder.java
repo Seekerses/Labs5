@@ -93,10 +93,15 @@ public class ReaderProductBuilder {
                     }
                 }
             }
-            return new Product(null,name,coordinates,price,unitOfMeasure,manufacturer,creationDate);
         }
         catch (Exception e){
             System.out.println("Ошибка: введено некорректное значение.");
+        }
+        try {
+            return new Product(null, name, coordinates, price, unitOfMeasure, manufacturer, creationDate);
+        }
+        catch (Exception e){
+            e.printStackTrace();
             return null;
         }
     }
