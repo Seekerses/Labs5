@@ -1,10 +1,13 @@
 package Control;
 
+import cmd.CommandHistory;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 public class CommandController {
     private boolean isOn;
+    private  static CommandHistory commandHistory = new CommandHistory();
 
     public void start(Interpretator interpretator){
         isOn = true;
@@ -21,8 +24,12 @@ public class CommandController {
         }
     }
 
-    public  void stop(){
+    public void stop(){
         isOn = false;
+    }
+
+    public static CommandHistory getCommandHistory(){
+        return commandHistory;
     }
 
 }

@@ -5,6 +5,7 @@ import Control.TableController;
 import Control.TableManager;
 import cmd.Command;
 import productdata.Product;
+import productdata.ReaderProductBuilder;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -23,7 +24,7 @@ public class CommandUpdate implements Command {
             if (map.getValue().getId() == i) {
                 counter ++;
                 BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-                TableController.getCurrentTable().replace(map.getKey(),new Product(reader));
+                TableController.getCurrentTable().replace(map.getKey(), ReaderProductBuilder.buildProduct(reader));
             }
         }
         if(counter==0){
