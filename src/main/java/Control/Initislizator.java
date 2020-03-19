@@ -27,7 +27,6 @@ public class Initislizator {
             System.out.println("Initializing complete...");
 
         } catch (Exception e) {
-            e.printStackTrace();
             System.out.println("Содержимое файла содержит ошибку, введите адрес файла :");
             try {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));

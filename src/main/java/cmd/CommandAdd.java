@@ -3,6 +3,7 @@ import Control.Initislizator;
 import Control.TableController;
 import Control.TableManager;
 import productdata.Product;
+import productdata.ReaderProductBuilder;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -16,7 +17,7 @@ public class CommandAdd implements Command{
             System.out.println(" Ведите ключ продукта : ");
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
             try {
-                TableController.getCurrentTable().put(reader.readLine(), new Product(reader));
+                TableController.getCurrentTable().put(reader.readLine(), ReaderProductBuilder.buildProduct(reader));
             } catch (Exception e) {
                 e.printStackTrace();
             }
