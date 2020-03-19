@@ -50,4 +50,14 @@ public class Coordinates {
     public String output(){
         return x + ";" + y;
     }
+
+    public double getX() {
+        return x;
+    }
+
+    public Integer getY() {
+        return y;
+    }
+
+
 }
