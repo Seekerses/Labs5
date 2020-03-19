@@ -35,11 +35,11 @@ public class CommandInterpretator implements Interpretator{
         commands.put("save",commandSave);
         commands.put("show",commandShow);
         commands.put("history",commandHistory);
-        commands.put("insert key",commandAdd);
+        commands.put("insert",commandAdd);
         commands.put("min_by_name",commandMin);
         commands.put("remove_key",commandRemove);
         commands.put("execute_script",commandExecute_script);
-        commands.put("update id",commandUpdate);
+        commands.put("update",commandUpdate);
         commands.put("exit",commandExit);
         commands.put("remove_lower",commandremove_lower);
         commands.put("filter_less_than_manufacturer",commandfilter_less_than_manufacturer);

@@ -30,6 +30,10 @@ public class TableManager {
         table.put(index,product);
     }
 
+    public void replace(String key,Product product){
+        table.replace(key,table.get(key),product);
+    }
+
     public Product get(String index){
         return table.get(index);
     }

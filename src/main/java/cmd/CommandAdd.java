@@ -28,6 +28,6 @@ public class CommandAdd implements Command{
 
     @Override
     public String toString() {
-        return "insert key";
+        return "insert";
     }
 }
