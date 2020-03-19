@@ -1,29 +1,28 @@
 package cmd;
-import Control.TableManager;
-import cmpr.IDComparator;
-import cmpr.OrganizationIDComparator;
-import productdata.Organization;
+
+import Control.TableController;
 import productdata.Product;
 
-import java.io.FileNotFoundException;
-import java.util.*;
+import java.io.IOException;
+import java.util.Iterator;
+import java.util.Map;
 
-public class Commandfilter_less_than_manufacturer implements Command{
-    private String manufacturer;
+public class Commandfilter_less_than_manufacturer implements Command {
 
     @Override
-    public void execute(String[] args) {
-        IDComparator<Organization> comp = new OrganizationIDComparator();
-
-
-        System.out.println("Введите ID, по которому происходит сравнение: ");
-        Scanner scanner = new Scanner(System.in);
-        if(scanner.hasNextLong()){
-            Long id = scanner.nextLong();
-
-        }else{
-            System.out.println("Неправильный ввод. Попробуйте снова: ");
-            execute(args);
+    public void execute(String[] args) throws IOException {
+        Iterator<Map.Entry<String, Product>> it = TableController.getCurrentTable().getSet().iterator();
+        int i = Integer.parseInt(args[0]);
+        while(it.hasNext()){
+            Map.Entry<String,Product> map = it.next();
+            if (map.getValue().getManufacturer().getId() < i) {
+                System.out.println(TableController.getCurrentTable().get(map.getKey()).toString());
+            }
         }
+    }
+
+    @Override
+    public String toString() {
+        return "filter_less_than_manufacturer";
     }
 }

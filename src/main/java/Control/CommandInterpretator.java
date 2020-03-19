@@ -25,19 +25,25 @@ public class CommandInterpretator implements Interpretator{
         CommandRemove commandRemove = new CommandRemove();
         CommandExecute_Script commandExecute_script = new CommandExecute_Script();
         CommandExit commandExit = new CommandExit();
+        CommandUpdate commandUpdate = new CommandUpdate();
+        Commandremove_lower commandremove_lower = new Commandremove_lower();
+        Commandfilter_less_than_manufacturer commandfilter_less_than_manufacturer = new Commandfilter_less_than_manufacturer();
 
         commands.put("help",commandHelp);
         commands.put("info",commandInfo);
         commands.put("clear",commandClear);
         commands.put("save",commandSave);
         commands.put("show",commandShow);
-        commands.put("add",commandAdd);
         commands.put("history",commandHistory);
         commands.put("insert key",commandAdd);
         commands.put("min_by_name",commandMin);
         commands.put("remove_key",commandRemove);
         commands.put("execute_script",commandExecute_script);
+        commands.put("update id",commandUpdate);
         commands.put("exit",commandExit);
+        commands.put("remove_lower",commandremove_lower);
+        commands.put("filter_less_than_manufacturer",commandfilter_less_than_manufacturer);
+
     }
 
     public void setCommands(Map<String, Command> commandslist) {
@@ -51,6 +57,7 @@ public class CommandInterpretator implements Interpretator{
     @Override
     public void handle(String[] args) throws IOException {
         if (commands.containsKey(args[0])) {
+            commandHistory.addCommand(commands.get(args[0]).toString());
             try {
                     ArrayList<String> arguments;
                     if(args.length > 1) {
@@ -60,7 +67,6 @@ public class CommandInterpretator implements Interpretator{
                     else arguments = null;
 
                     commands.get(args[0]).execute(arguments == null ? null : arguments.toArray(new String[0]));
-                    commandHistory.addCommand(commands.get(args[0]).toString());
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
