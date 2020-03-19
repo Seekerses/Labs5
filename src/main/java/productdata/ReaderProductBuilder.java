@@ -44,7 +44,7 @@ public class ReaderProductBuilder {
             e.printStackTrace();
         }
         LocalDateTime creationDate = LocalDateTime.now();
-        Coordinates coordinates = new Coordinates(reader);
+        Coordinates coordinates = buildCoordinates(reader);
         System.out.println("Введите единицы массы: \n" +
                 "    KILOGRAMS,\n" +
                 "    CENTIMETERS,\n" +
@@ -85,7 +85,7 @@ public class ReaderProductBuilder {
                             }
                         }
                         else {
-                            manufacturer = new Organization(reader);
+                            manufacturer = buildOrganization(reader);
                             break;
                         }
                     } catch (Exception e) {
@@ -104,5 +104,192 @@ public class ReaderProductBuilder {
             e.printStackTrace();
             return null;
         }
+    }
+
+    private static Coordinates buildCoordinates(BufferedReader reader){
+        double x;
+        Integer y = null;
+        System.out.println("Введите координаты организации. Введите координату x:");
+        while (true){
+            try {
+                x = Double.parseDouble(reader.readLine());
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Ошибка: введено некорректное значение");
+            } catch (IOException e) {
+                System.out.println("Ошибка: введено некорректное значение.");
+            }
+        }
+        System.out.println("Введите координату y:");
+        while (y == null) {
+            try {
+                y = Integer.parseInt(reader.readLine());
+            }
+            catch (Exception e) {
+                System.out.println("Ошибка: введено некорректное значение");
+                continue;
+            }
+            if (y < -150){
+                System.out.println("Ошибка: число выходит за диапазон. Введите координату y > -150:");
+                y = null;
+            }
+        }
+        try {
+            return new Coordinates(x, y);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    private static Organization buildOrganization(BufferedReader reader){
+        String name = null;
+        String fullName = null;
+        OrganizationType type = null;
+        Address postalAddress = null;
+        try {
+            System.out.println("Введите имя организации:");
+            while (name == null) {
+                try {
+                    name = reader.readLine();
+                }
+                catch (IOException e){
+                    System.out.println("Ошибка: введено некорректное значение. Введите имя организации:");
+                }
+                if (name == null || name.equals("")) {
+                    System.out.println("Ошибка: введено пустое значение. Введите имя организации");
+                }
+            }
+            System.out.println("Введите полное имя организации :");
+            while (fullName == null) {
+                while(fullName == null) {
+                    try {
+                        fullName = reader.readLine();
+                    } catch (IOException e) {
+                        System.out.println("Ошибка: введено некорректное значение. Введите полное имя организации:");
+                    }
+                }
+                if (fullName.length() > 1404) {
+                    System.out.println("Ошибка: введено слишком длинное имя. Введите имя организации:");
+                    fullName = null;
+                }
+                if (UniqueController.check(fullName)){
+                    System.out.println("Полное имя организации должно быть уникальным.");
+                    fullName = null;
+                }
+            }
+            System.out.println("Ввести тип организации ? \n yes \n any words to no");
+            try {
+                if(reader.readLine().equals("yes")) {
+                    System.out.println("Введите тип организации:\n" +
+                            " PUBLIC,\n" +
+                            " TRUST,\n" +
+                            " PRIVATE_LIMITED_COMPANY");
+                    while(type == null) {
+                        try {
+                            type = OrganizationType.valueOf(reader.readLine().toUpperCase());
+                        } catch (IllegalArgumentException e) {
+                            System.out.println(" Введено неверное значение.");
+                            type = null;
+                        }
+                    }
+                }
+            }
+            catch (IOException e){
+                System.out.println("Ошибка: введено некорректное значение.");
+            }
+            System.out.println("Ввести адрес ? \n yes \n any words to no");
+            try {
+                if(reader.readLine().equals("yes")) {
+                    postalAddress = buildAddress(reader);
+                }
+            }
+            catch (IOException e){
+                System.out.println("Ошибка: введено некорректное значение.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try{
+            Organization org = new Organization(null,name,fullName,type,postalAddress);
+            UniqueController.put(fullName,org);
+            return org;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    private static Address buildAddress(BufferedReader reader){
+        String street = null;
+        Location town = null;
+        System.out.println("Введите улицу: ");
+        while (street == null) {
+            try {
+                street = reader.readLine();
+            }
+            catch (IOException e){
+                System.out.println("Ошибка: введено некорректное значение. Введите улицу:");
+            }
+            if (street == null) {
+                System.out.println("Ошибка: введено пустое значение. Введите улицу:");
+            }
+        }
+        System.out.println("Ввести город ? \n yes \n any words to no");
+        try {
+            if(reader.readLine().equals("yes")) {
+                town = buildLocation(reader);
+            }
+        }
+        catch (IOException e){
+            System.out.println("Ошибка: введено некорректное значение.");
+        }
+        return new Address(street,town);
+    }
+
+    private static Location buildLocation(BufferedReader reader){
+        Long x = null;
+        int y = 0;
+        Long z = null;
+        try {
+            System.out.println("Введите координаты организации. Введите координату x:");
+            while(x == null) {
+                try {
+                    x = Long.parseLong(reader.readLine());
+                }
+                catch (NumberFormatException e){
+                    System.out.println("Ошибка: введено некорректное значение. Введите координату x:");
+                    x = null;
+                }
+            }
+            System.out.println("Введите координату y:");
+            while (true){
+                try {
+                    y = Integer.parseInt(reader.readLine());
+                    break;
+                } catch (NumberFormatException e) {
+                    System.out.println("Ошибка: введено некорректное значение");
+                } catch (IOException e) {
+                    System.out.println("Ошибка: введено некорректное значение.");
+                }
+            }
+
+            System.out.println("Введите координату z:");
+            while(z == null) {
+                try {
+                    z = Long.parseLong(reader.readLine());
+                }
+                catch (NumberFormatException e){
+                    System.out.println("Ошибка: введено некорректное значение. Введите координату z:");
+                    z = null;
+                }
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new Location(x,y,z);
     }
 }

@@ -40,9 +40,9 @@ public class Product {
     public String out(){
         return id.toString() + ";" + name + ";" + coordinates.output() + ";" +
                 (manufacturer == null ? ";;;;;;;":manufacturer.getId() + ";" +
-                        (manufacturer.getPostalAddress() == null ? ";;;" : manufacturer.getPostalAddress())
+                        (manufacturer.getPostalAddress() == null ? ";;;" : manufacturer.getPostalAddress().toString())
                         + ";" + manufacturer.getName() + ";" + manufacturer.getFullName() + ";"
-                        + (manufacturer.getType() == null?"":manufacturer.getType())) + ";" +
+                        + (manufacturer.getType() == null?"":manufacturer.getType().toString())) + ";" +
                 unitOfMeasure.toString() + ";" + creationDate.toString() + ";" + (price == null ? "":price.toString());
     }
 

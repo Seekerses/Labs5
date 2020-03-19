@@ -2,6 +2,7 @@ package Control;
 import java.io.*;
 import java.time.LocalDateTime;
 
+import Exceptions.NotUniqueFullName;
 import productdata.*;
 
 public class Initislizator {
@@ -57,7 +58,16 @@ public class Initislizator {
             Coordinates coord = new Coordinates("".equals(str[3]) ? 0 : Double.parseDouble(str[3]), Integer.parseInt(str[4]));
             Organization org;
             if(!"".equals(str[11])) {
-                org = new Organization(Integer.parseInt(str[5]), str[10], str[11],"".equals(str[12]) ? null : OrganizationType.valueOf(str[12]), adr);
+                try {
+                    org = new Organization(Integer.parseInt(str[5]), str[10], str[11], "".equals(str[12]) ? null : OrganizationType.valueOf(str[12]), adr);
+                }
+                catch (NotUniqueFullName e){
+                    Organization comp = UniqueController.getOrgTable().get(str[11]);
+                    if(comp.getPostalAddress().equals(adr) && comp.getName().equals(str[10])
+                            && comp.getType().equals("".equals(str[12]) ? null : OrganizationType.valueOf(str[12])))
+                        org = comp;
+                    else throw new NotUniqueFullName();
+                }
             }
             else {org = null;}
             product = new Product(Long.parseLong(str[1]),str[2], coord, str.length < 16 ? null : Float.parseFloat(str[15]), UnitOfMeasure.valueOf(str[13]), org , "".equals(str[14]) ? null: LocalDateTime.parse(str[14]));

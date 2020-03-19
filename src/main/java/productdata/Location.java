@@ -7,46 +7,6 @@ public class Location {
     private int y;
     private Long z; //Поле не может быть null
 
-    Location(BufferedReader reader){
-        try {
-            System.out.println("Введите координаты организации. Введите координату x:");
-            while(x == null) {
-                try {
-                    x = Long.parseLong(reader.readLine());
-                }
-                catch (NumberFormatException e){
-                    System.out.println("Ошибка: введено некорректное значение. Введите координату x:");
-                    x = null;
-                }
-            }
-            System.out.println("Введите координату y:");
-            while (true){
-                try {
-                    y = Integer.parseInt(reader.readLine());
-                    break;
-                } catch (NumberFormatException e) {
-                    System.out.println("Ошибка: введено некорректное значение");
-                } catch (IOException e) {
-                    System.out.println("Ошибка: введено некорректное значение.");
-                }
-            }
-
-            System.out.println("Введите координату z:");
-            while(z == null) {
-                try {
-                    z = Long.parseLong(reader.readLine());
-                }
-                catch (NumberFormatException e){
-                    System.out.println("Ошибка: введено некорректное значение. Введите координату z:");
-                    z = null;
-                }
-            }
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     public Location(Long x, int y, Long z) throws NullPointerException{
         if ( x == null || z == null) throw new NullPointerException();
         this.x = x;
@@ -62,4 +22,13 @@ public class Location {
     public String output(){
         return x + ";" + y + ";" + z;
     }
+
+    @Override
+    public boolean equals(Object obj){
+        if(obj instanceof Location){
+            return (((Location) obj).x.equals(x)  && ((Location) obj).y == y && ((Location) obj).z.equals(z));
+        }
+        else return false;
+    }
+
 }
