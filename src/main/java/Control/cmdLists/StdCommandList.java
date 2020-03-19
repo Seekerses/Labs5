@@ -25,9 +25,11 @@ public class StdCommandList implements CommandList {
         CommandUpdate commandUpdate = new CommandUpdate();
         Commandremove_lower commandremove_lower = new Commandremove_lower();
         Commandfilter_less_than_manufacturer commandfilter_less_than_manufacturer = new Commandfilter_less_than_manufacturer();
+        Commandgroup_counting_by_coordinates commandgroup_counting_by_coordinates = new Commandgroup_counting_by_coordinates();
 
         commands.put("help", commandHelp);
         commands.put("info", commandInfo);
+        commands.put("group_counting_by_coordinates",commandgroup_counting_by_coordinates);
         commands.put("clear", commandClear);
         commands.put("save", commandSave);
         commands.put("show", commandShow);

@@ -1,9 +1,10 @@
 package cmpr;
 
-import cmpr.NameComparator;
 import productdata.Product;
 
-public class ProductNameComparator implements NameComparator<Product> {
+import java.util.Comparator;
+
+public class ProductNameComparator implements Comparator<Product> {
 
     @Override
     public int compare(Product a, Product b) {

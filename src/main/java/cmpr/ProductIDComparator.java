@@ -2,7 +2,9 @@ package cmpr;
 
 import productdata.Product;
 
-public class ProductIDComparator implements IDComparator<Product> {
+import java.util.Comparator;
+
+public class ProductIDComparator implements Comparator<Product> {
 
     @Override
     public int compare(Product a, Product b) {

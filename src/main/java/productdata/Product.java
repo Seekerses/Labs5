@@ -65,4 +65,12 @@ public class Product {
     public Organization getManufacturer() {
         return manufacturer;
     }
+
+    public Float getPrice() {
+        return price;
+    }
+
+    public Coordinates getCoordinates() {
+        return coordinates;
+    }
 }
