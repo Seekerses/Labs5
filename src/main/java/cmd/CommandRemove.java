@@ -5,11 +5,10 @@ import Control.TableManager;
 import java.io.FileNotFoundException;
 
 public class CommandRemove implements Command {
-    private String key;
 
     @Override
     public void execute(String[] args) {
-        TableController.getCurrentTable().remove(key);
+        TableController.getCurrentTable().remove(args[0]);
     }
 
     public String toString(){

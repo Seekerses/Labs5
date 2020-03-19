@@ -9,6 +9,8 @@ import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Hashtable;
 import java.util.Map;
+import java.util.Set;
+
 //reciever
 public class TableManager {
     private Hashtable<String, Product> table;
@@ -68,7 +70,7 @@ public class TableManager {
         table.remove(key);
     }
 
-    public Iterable<? extends Map.Entry> getSet() {
+    public Set<Map.Entry<String, Product>> getSet() {
         return table.entrySet();
     }
 
@@ -82,5 +84,9 @@ public class TableManager {
 
     void setCreationDate(LocalDateTime date){
             Date = date;
+    }
+
+    public Set<String> getkeySet() {
+        return table.keySet();
     }
 }
