@@ -27,6 +27,7 @@ public class CommandInterpretator implements Interpretator{
         CommandExit commandExit = new CommandExit();
         CommandUpdate commandUpdate = new CommandUpdate();
         Commandremove_lower commandremove_lower = new Commandremove_lower();
+        Commandfilter_less_than_manufacturer commandfilter_less_than_manufacturer = new Commandfilter_less_than_manufacturer();
 
         commands.put("help",commandHelp);
         commands.put("info",commandInfo);
@@ -41,6 +42,8 @@ public class CommandInterpretator implements Interpretator{
         commands.put("update id",commandUpdate);
         commands.put("exit",commandExit);
         commands.put("remove_lower",commandremove_lower);
+        commands.put("filter_less_than_manufacturer",commandfilter_less_than_manufacturer);
+
     }
 
     public void setCommands(Map<String, Command> commandslist) {
@@ -54,6 +57,7 @@ public class CommandInterpretator implements Interpretator{
     @Override
     public void handle(String[] args) throws IOException {
         if (commands.containsKey(args[0])) {
+            commandHistory.addCommand(commands.get(args[0]).toString());
             try {
                     ArrayList<String> arguments;
                     if(args.length > 1) {
@@ -63,7 +67,6 @@ public class CommandInterpretator implements Interpretator{
                     else arguments = null;
 
                     commands.get(args[0]).execute(arguments == null ? null : arguments.toArray(new String[0]));
-                    commandHistory.addCommand(commands.get(args[0]).toString());
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }

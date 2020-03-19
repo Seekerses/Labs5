@@ -22,4 +22,9 @@ public class Commandremove_lower implements Command{
             }
         }
     }
+
+    @Override
+    public String toString() {
+        return "remove_lower";
+    }
 }
