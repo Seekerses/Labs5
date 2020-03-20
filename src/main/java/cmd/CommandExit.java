@@ -3,7 +3,7 @@ package cmd;
 /**
  * break the programm
  *
- * @author  Alexandr
+ *
  */
 
 public class CommandExit implements Command {

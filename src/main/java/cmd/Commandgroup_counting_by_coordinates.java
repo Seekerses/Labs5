@@ -6,6 +6,12 @@ import productdata.Product;
 import java.io.IOException;
 import java.util.*;
 
+/**
+ * groups up all elements by their coordinates
+ *
+ *
+ */
+
 public class Commandgroup_counting_by_coordinates implements Command {
     @Override
     public void execute(String[] args) throws IOException {
@@ -26,6 +32,12 @@ public class Commandgroup_counting_by_coordinates implements Command {
             System.out.println("По координатам: " + m.getKey() + " находится " + m.getValue() + " продукта(ов).");
         }
     }
+
+    /**
+     * get name of command
+     *
+     * @return String
+     */
 
     @Override
     public String toString() {

@@ -7,6 +7,12 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.*;
 
+/**
+ * replace new product with old one if price of new product is higher
+ *
+ *
+ */
+
 public class Commandreplace_if_greater implements Command{
 
     @Override
@@ -21,6 +27,12 @@ public class Commandreplace_if_greater implements Command{
             }
         }
     }
+
+    /**
+     * get name of command
+     *
+     * @return String
+     */
 
     @Override
     public String toString() {

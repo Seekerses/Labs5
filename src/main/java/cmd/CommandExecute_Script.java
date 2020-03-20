@@ -1,20 +1,20 @@
 package cmd;
 
-import Control.ScriptParcer;
+import Control.ScriptParser;
 
 import java.io.IOException;
 
 /**
  * execute command from script
  *
- * @author Daniel
+ *
  */
 
 public class CommandExecute_Script implements Command{
 
     @Override
     public void execute(String[] args) throws IOException {
-        ScriptParcer.parseScript(args[0]);
+        ScriptParser.parseScript(args[0]);
     }
 
     /**

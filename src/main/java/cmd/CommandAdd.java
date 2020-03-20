@@ -9,7 +9,7 @@ import java.io.InputStreamReader;
 /**
  * get name of command
  *
- * @author Alexandr
+ *
  */
 
 public class CommandAdd implements Command{

@@ -7,7 +7,7 @@ import java.util.Hashtable;
 /**
  * remove all elements from the collection
  *
- * @author Alexandr
+ *
  */
 
 public class CommandClear implements Command {
