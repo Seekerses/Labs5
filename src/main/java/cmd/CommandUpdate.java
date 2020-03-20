@@ -12,7 +12,7 @@ import java.util.Map;
 /**
  * Update whole element with given id
  *
- * @author Alexandr
+ *
  */
 
 public class CommandUpdate implements Command {

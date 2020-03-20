@@ -3,7 +3,7 @@ package cmd;
 /**
  * Get info about all commands
  *
- * @author Alexandr
+ *
  */
 
 public class CommandHelp implements Command {

@@ -7,6 +7,12 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.Map;
 
+/**
+ * get elements which have lower manufacturer id than one's given
+ *
+ *
+ */
+
 public class Commandfilter_less_than_manufacturer implements Command {
 
     @Override
@@ -20,6 +26,12 @@ public class Commandfilter_less_than_manufacturer implements Command {
             }
         }
     }
+
+    /**
+     * get name of command
+     *
+     * @return String
+     */
 
     @Override
     public String toString() {

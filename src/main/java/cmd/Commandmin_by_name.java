@@ -6,6 +6,12 @@ import productdata.Product;
 import java.util.Iterator;
 import java.util.Map;
 
+/**
+ * get element with the shortest name
+ *
+ *
+ */
+
 public class Commandmin_by_name implements Command {
 
     @Override
@@ -27,6 +33,12 @@ public class Commandmin_by_name implements Command {
             System.out.println(p.toString());
         }else{System.out.println("Empty table!");}
     }
+
+    /**
+     * get name of command
+     *
+     * @return String
+     */
 
     public String toString() {
         return "min_by_name";

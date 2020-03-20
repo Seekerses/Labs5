@@ -7,7 +7,7 @@ import java.io.FileNotFoundException;
 /**
  * save the collection to file .csv
  *
- * @author Alexandr&Daniel
+ *
  */
 
 public class CommandSave implements Command {
