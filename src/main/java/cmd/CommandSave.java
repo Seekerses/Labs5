@@ -14,7 +14,12 @@ public class CommandSave implements Command {
 
     @Override
     public void execute(String[] args) throws FileNotFoundException {
-        TableController.getCurrentTable().save(args[0]);
+        if(args != null) {
+            TableController.getCurrentTable().save(args[0]);
+        }
+        else{
+            TableController.getCurrentTable().save("src\\saves\\saved.csv");
+        }
     }
 
     /**
