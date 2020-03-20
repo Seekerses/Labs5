@@ -1,9 +1,6 @@
 package cmd;
 
-import Control.Initislizator;
 import Control.TableController;
-import Control.TableManager;
-import cmd.Command;
 import productdata.Product;
 import productdata.ReaderProductBuilder;
 
@@ -12,7 +9,19 @@ import java.io.InputStreamReader;
 import java.util.Iterator;
 import java.util.Map;
 
+/**
+ * Update whole element with given id
+ *
+ * @author Alexandr
+ */
+
 public class CommandUpdate implements Command {
+
+    /**
+     * Iterates through all elements of collection and update element with given id
+     *
+     *
+     */
 
     @Override
     public void execute(String[] args) {
@@ -31,6 +40,12 @@ public class CommandUpdate implements Command {
             System.out.println("Элемента с данным id не существует. Повторите ввод: ");
         }
     }
+
+    /**
+     * get name of command
+     *
+     * @return String
+     */
 
     @Override
     public String toString() {

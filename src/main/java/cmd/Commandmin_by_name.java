@@ -15,8 +15,8 @@ public class Commandmin_by_name implements Command {
         Product p = null;
         for (Product prod : TableController.getCurrentTable().getProducts()) {
             if(i==1){min=prod.getName();}
-            if(i!=0) {
-                if (min.compareTo(prod.getName()) >= 0) {
+            if(i==0) {
+                if (min.compareTo(prod.getName()) <= 0) {
                     min = prod.getName();
                     p = prod;
                 }

@@ -73,4 +73,8 @@ public class Product {
     public Coordinates getCoordinates() {
         return coordinates;
     }
+
+    public int compareTo(Product product) {
+        return id.intValue() - product.getId().intValue();
+    }
 }

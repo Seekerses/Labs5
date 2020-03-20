@@ -1,4 +1,5 @@
 package Control;
+import cmp.IDComparator;
 import productdata.Product;
 
 import java.io.BufferedOutputStream;
@@ -6,10 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.Hashtable;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 //reciever
 public class TableManager {
@@ -43,8 +41,10 @@ public class TableManager {
     }
 
     public void save() throws FileNotFoundException {
-        FileOutputStream fos = new FileOutputStream("C:\\Users\\seeke\\Desktop\\Saved.csv");
+        FileOutputStream fos = new FileOutputStream("C:\\projects\\kurs1\\Prog\\Labs5\\src\\main\\resources\\Saved.csv");
         StringBuilder text= new StringBuilder();
+        Comparator cmp = new IDComparator(table);
+        TreeMap<String, Product> sorted_map = new TreeMap<String, Product>(cmp);
         text.append(Date.toString()).append("\n");
         for (Map.Entry<String, Product> entry : table.entrySet()) {
 

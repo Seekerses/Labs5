@@ -8,8 +8,19 @@ import productdata.ReaderProductBuilder;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
+/**
+ * get name of command
+ *
+ * @author Alexandr
+ */
 
 public class CommandAdd implements Command{
+
+    /**
+     * insert product to hashtable
+     *
+     * @param args is key to new product
+     */
 
     @Override
     public void execute(String[] args) {
@@ -26,6 +37,12 @@ public class CommandAdd implements Command{
             Initislizator.build(TableController.getCurrentTable(),args);
         }
     }
+
+    /**
+     * get name of command
+     *
+     * @return String
+     */
 
     @Override
     public String toString() {

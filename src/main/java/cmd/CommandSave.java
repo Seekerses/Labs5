@@ -4,12 +4,24 @@ import Control.TableManager;
 
 import java.io.FileNotFoundException;
 
+/**
+ * save the collection to file .csv
+ *
+ * @author Alexandr&Daniel
+ */
+
 public class CommandSave implements Command {
 
     @Override
     public void execute(String[] args) throws FileNotFoundException {
         TableController.getCurrentTable().save();
     }
+
+    /**
+     * get name of command
+     *
+     * @return String
+     */
 
     public String toString(){
         return "save";

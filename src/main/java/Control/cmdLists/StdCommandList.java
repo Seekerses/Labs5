@@ -23,11 +23,13 @@ public class StdCommandList implements CommandList {
         CommandExecute_Script commandExecute_script = new CommandExecute_Script();
         CommandExit commandExit = new CommandExit();
         CommandUpdate commandUpdate = new CommandUpdate();
+        Commandreplace_if_greater commandreplaceIfGreater = new Commandreplace_if_greater();
         Commandremove_lower commandremove_lower = new Commandremove_lower();
         Commandfilter_less_than_manufacturer commandfilter_less_than_manufacturer = new Commandfilter_less_than_manufacturer();
         Commandgroup_counting_by_coordinates commandgroup_counting_by_coordinates = new Commandgroup_counting_by_coordinates();
 
         commands.put("help", commandHelp);
+        commands.put("replace_if_greater",commandreplaceIfGreater);
         commands.put("info", commandInfo);
         commands.put("group_counting_by_coordinates",commandgroup_counting_by_coordinates);
         commands.put("clear", commandClear);

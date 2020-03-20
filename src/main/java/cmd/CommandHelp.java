@@ -1,5 +1,10 @@
 package cmd;
-import java.util.List;
+
+/**
+ * Get info about all commands
+ *
+ * @author Alexandr
+ */
 
 public class CommandHelp implements Command {
 
@@ -23,6 +28,12 @@ public class CommandHelp implements Command {
                 "group_counting_by_coordinates : сгруппировать элементы коллекции по значению поля coordinates, вывести количество элементов в каждой группе\n" +
                 "filter_less_than_manufacturer manufacturer : вывести элементы, значение поля manufacturer которых меньше заданного");
     }
+
+    /**
+     * get name of command
+     *
+     * @return String
+     */
 
     public String toString(){
         return "help";
