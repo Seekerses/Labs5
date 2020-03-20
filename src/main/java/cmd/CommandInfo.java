@@ -10,7 +10,7 @@ public class CommandInfo implements Command {
     public void execute(String[] args) {
         System.out.println("Size of collection: " + TableController.getCurrentTable().getSize() + "\n"
         + "Type of collection: " + TableController.getCurrentTable().getType() + "\n" +
-                "Date of creation: " + TableController.getCurrentTable().getCreationDate());
+                "Date of creation: " + TableController.getCurrentTable().getCreationDate().toString());
 
     }
 

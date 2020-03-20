@@ -1,8 +1,6 @@
 package cmd;
-import Control.Initislizator;
+import Control.Initializer;
 import Control.TableController;
-import Control.TableManager;
-import productdata.Product;
 import productdata.ReaderProductBuilder;
 
 import java.io.BufferedReader;
@@ -29,12 +27,13 @@ public class CommandAdd implements Command{
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
             try {
                 TableController.getCurrentTable().put(reader.readLine(), ReaderProductBuilder.buildProduct(reader));
+                System.out.println("Insertion complete...");
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
         else{
-            Initislizator.build(TableController.getCurrentTable(),args);
+            Initializer.build(TableController.getCurrentTable(),args);
         }
     }
 

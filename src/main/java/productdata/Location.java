@@ -1,12 +1,20 @@
 package productdata;
-import java.io.BufferedReader;
-import java.io.IOException;
 
+/**
+ * Class that represents a Location of organization
+ */
 public class Location {
     private Long x; //Поле не может быть null
     private int y;
     private Long z; //Поле не может быть null
 
+    /**
+     * Standard constructor
+     * @param x x coordinate
+     * @param y y coordinate
+     * @param z z coordinate
+     * @throws NullPointerException If you are trying to create a Location with an null x or z arguments
+     */
     public Location(Long x, int y, Long z) throws NullPointerException{
         if ( x == null || z == null) throw new NullPointerException();
         this.x = x;
@@ -19,7 +27,11 @@ public class Location {
         return ("x = " + x + " y = " + y + " z = " + z);
     }
 
-    public String output(){
+    /**
+     * Returns a fields value in format for saving
+     * @return String in format for saving
+     */
+    String output(){
         return x + ";" + y + ";" + z;
     }
 

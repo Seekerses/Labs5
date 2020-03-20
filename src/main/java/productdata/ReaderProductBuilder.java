@@ -4,8 +4,15 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
+/**
+ * Class that controls a building of Product using console
+ */
 public class ReaderProductBuilder {
-
+    /**
+     * This method creates a Product through a console input
+     * @param reader Reader that will interact with user
+     * @return Builded Product
+     */
     public static Product buildProduct(BufferedReader reader){
         String name = null;
         Float price = null;

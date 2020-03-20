@@ -10,9 +10,22 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 //client
-public class CommandInterpretator implements Interpretator{
+
+/**
+ * Class that takes a command from Controller and interpret it
+ */
+public class CommandInterpreter implements Interpreter {
+    /**
+     * Command List that Interpreter uses, changeable
+     */
     private CommandList cmdList =  new StdCommandList();
 
+    /**
+     * This method takes the command, separate it on command and arguments
+     * and then interpret command according to the current Command List
+     * @param args Command
+     * @throws IOException If an I/O error occurs
+     */
     @Override
     public void handle(String[] args) throws IOException {
             if (cmdList.getCommands().containsKey(args[0])) {
@@ -29,8 +42,15 @@ public class CommandInterpretator implements Interpretator{
                     e.printStackTrace();
                 }
             }
+            else {
+                System.out.println("Такой комманды не существует. Введите info чтобы узнать список доступных команд..");
+            }
         }
 
+    /**
+     * This method change the Command List that concrete Interpreter uses
+     * @param list New Command List
+     */
     public void changeCommandList(CommandList list){
         cmdList = list;
     }

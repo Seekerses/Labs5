@@ -5,13 +5,20 @@ import java.time.LocalDateTime;
 import Exceptions.NotUniqueFullName;
 import productdata.*;
 
-public class Initislizator {
-
+/**
+ * This class upload a table of Products from files(files must be correctly filled)
+ */
+public class Initializer {
+    /**
+     * This method fills the table with Product that creates using the csv file
+     * @param table Table, which will filled
+     * @param address Address of csv file
+     */
     public static void init(TableManager table, String address){
         try {
             File file = new File(address);
-            FileReader fileReader = new FileReader(file); // поток, который подключается к текстовому файлу
-            BufferedReader bufferedReader = new BufferedReader(fileReader); // соединяем FileReader с BufferedReader
+            FileReader fileReader = new FileReader(file);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
 
             String line = bufferedReader.readLine();
             if (line.contains(";")){
@@ -24,7 +31,7 @@ public class Initislizator {
             while ((line = bufferedReader.readLine()) != null) {
                 build(table,line.split(";"));
             }
-            bufferedReader.close(); // закрываем поток
+            bufferedReader.close();
             System.out.println("Initializing complete...");
 
         } catch (Exception e) {
@@ -39,6 +46,12 @@ public class Initislizator {
         }
     }
 
+    /**
+     * Creates the new Product using the Strings array where all arguments are located in correct positions(as in the saved file)
+     * @param table Built product will be placed here
+     * @param str Strings array of arguments for building Product
+     * @return Built Product
+     */
     public static Product build(TableManager table, String[] str){
         Location location;
         if (!"".equals(str[7] +  str[9])){

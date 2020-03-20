@@ -1,6 +1,5 @@
 package productdata;
-import java.io.BufferedReader;
-import java.io.IOException;
+import Exceptions.NegativePrice;
 import java.time.LocalDateTime;
 
 public class Product {
@@ -13,7 +12,19 @@ public class Product {
     private UnitOfMeasure unitOfMeasure; //Поле не может быть null
     private Organization manufacturer; //Поле может быть null
 
-    public Product(Long id,String name, Coordinates coordinates, Float price, UnitOfMeasure unitOfMeasure, Organization organization,LocalDateTime data) throws Exception {
+    /**
+     * Standart Product constructor
+     * @param id It uses for setting id of Product when reading a table from files
+     * @param name Name of Product
+     * @param coordinates Coordinates of Product
+     * @param price Price of Product
+     * @param unitOfMeasure Units of measure of Product
+     * @param organization Organization that produces a Product
+     * @param data It uses for setting creation date of Product when reading a table from files
+     * @throws NullPointerException If you are trying to create a Product with null name, coordinates or units of measure arguments
+     * @throws NegativePrice If you are trying to create a Product with negative price
+     */
+    public Product(Long id,String name, Coordinates coordinates, Float price, UnitOfMeasure unitOfMeasure, Organization organization,LocalDateTime data) throws NullPointerException,NegativePrice {
         if (id == null ) {
             idCounter++;
             this.id = idCounter;
@@ -23,7 +34,7 @@ public class Product {
             this.id = id;
         }
         if (name == null || coordinates == null || unitOfMeasure == null) throw new NullPointerException();
-        if (price < 0) throw new Exception("Цена не может быть меньше 0");
+        if (price < 0) throw new NegativePrice();
         this.name = name;
         this.price = price;
         this.coordinates = coordinates;
@@ -37,6 +48,10 @@ public class Product {
         this.manufacturer = organization;
     }
 
+    /**
+     * Returns a fields value in format for saving
+     * @return String in format for saving
+     */
     public String out(){
         return id.toString() + ";" + name + ";" + coordinates.output() + ";" +
                 (manufacturer == null ? ";;;;;;;":manufacturer.getId() + ";" +
@@ -46,6 +61,10 @@ public class Product {
                 unitOfMeasure.toString() + ";" + creationDate.toString() + ";" + (price == null ? "":price.toString());
     }
 
+    /**
+     * Name getter
+     * @return Name
+     */
     public String getName() {
         return name;
     }
@@ -58,23 +77,51 @@ public class Product {
                 + unitOfMeasure.toString() + " \nПроизводит : " + (manufacturer == null ? "не указано" : manufacturer.toString()));
     }
 
+    /**
+     * Id getter
+     * @return Id
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     * Organization getter
+     * @return Organization
+     */
     public Organization getManufacturer() {
         return manufacturer;
     }
 
+    /**
+     * Price getter
+     * @return Price
+     */
     public Float getPrice() {
         return price;
     }
 
+    /**
+     * Coordinates getter
+     * @return Coordinates
+     */
     public Coordinates getCoordinates() {
         return coordinates;
     }
 
-    public int compareTo(Product product) {
-        return id.intValue() - product.getId().intValue();
+    /**
+     * Creation Date getter
+     * @return Creation Date
+     */
+    public LocalDateTime getCreationDate() {
+        return creationDate;
+    }
+
+    /**
+     * UnitsOfMeasure getter
+     * @return Units of Measure
+     */
+    public UnitOfMeasure getUnitOfMeasure() {
+        return unitOfMeasure;
     }
 }

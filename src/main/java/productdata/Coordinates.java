@@ -1,15 +1,23 @@
 package productdata;
-import java.io.BufferedReader;
-import java.io.IOException;
+import Exceptions.InvalidYCoordinate;
 
+/**
+ * Class that represents a coordinates of a Product
+ */
 public class Coordinates {
     private double x;
     private Integer y; //Значение поля должно быть больше -150, Поле не может быть null
 
-
-    public Coordinates(double x, Integer y)throws Exception{
+    /**
+     * Standard constructor
+     * @param x x coordinate
+     * @param y y coordinate
+     * @throws NullPointerException If you are trying to create a Coordinate with a null Y argument
+     * @throws InvalidYCoordinate If you are trying to create a Coordinate with an Y argument less than -150
+     */
+    public Coordinates(double x, Integer y) throws NullPointerException, InvalidYCoordinate {
         if (y == null) throw new NullPointerException();
-        if (y < -150 ) throw new Exception("Неверная координата y");
+        if (y < -150 ) throw new InvalidYCoordinate();
         this.x = x;
         this.y = y;
     }
@@ -19,14 +27,26 @@ public class Coordinates {
         return (" x = " + x + " y = " + y);
     }
 
+    /**
+     * Returns a fields of object in format for saving
+     * @return String in in format for saving
+     */
     public String output(){
         return x + ";" + y;
     }
 
+    /**
+     *  Getter x
+     * @return x coordinate
+     */
     public double getX() {
         return x;
     }
 
+    /**
+     * Getter y
+     * @return y coordinate
+     */
     public Integer getY() {
         return y;
     }

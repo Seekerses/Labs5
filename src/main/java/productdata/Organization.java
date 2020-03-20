@@ -1,9 +1,10 @@
 package productdata;
 import Exceptions.NotUniqueFullName;
+import Exceptions.TooLargeFullName;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-
+/**
+ * Class that represents a organization that produces a Product
+ */
 public class Organization {
     private static int orgId;
     private int id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
@@ -12,9 +13,20 @@ public class Organization {
     private OrganizationType type; //Поле может быть null
     private Address postalAddress; //Поле может быть null
 
-    public Organization(Integer id,String name, String fullName, OrganizationType type, Address postalAddress) throws Exception{
+    /**
+     * Standard constructor
+     * @param id It uses for setting id of Organization when reading a table from files
+     * @param name Name of Org
+     * @param fullName Full Name of Org, that must be unique
+     * @param type Type of Org
+     * @param postalAddress Address of Org
+     * @throws NullPointerException If you are trying to create an Organization with null name or fullName
+     * @throws TooLargeFullName If you are trying to create an Organization with full name that a longer than 1404 symbols
+     * @throws NotUniqueFullName If you are trying to create an Organization with a full name that already exist
+     */
+    public Organization(Integer id,String name, String fullName, OrganizationType type, Address postalAddress) throws NullPointerException,TooLargeFullName,NotUniqueFullName{
         if (name == null || fullName == null) throw new NullPointerException();
-        if (fullName.length() >1404) throw new Exception("Too large full name");
+        if (fullName.length() >1404) throw new TooLargeFullName();
         if (UniqueController.check(fullName)) throw new NotUniqueFullName();
         if (id == null) {
             orgId++;
@@ -30,23 +42,42 @@ public class Organization {
         UniqueController.put(this.fullName,this);
     }
 
-
+    /**
+     * Id getter
+     * @return id
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * Name getter
+     * @return name
+     */
     public String getName(){
         return name;
     }
 
+    /**
+     * FullName getter
+     * @return full name
+     */
     public String getFullName() {
         return fullName;
     }
 
+    /**
+     * Address getter
+     * @return Address
+     */
     public Address getPostalAddress() {
         return postalAddress;
     }
 
+    /**
+     * Type getter
+     * @return Type
+     */
     public OrganizationType getType(){
         return type;
     }

@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.List;
 
 public class CommandHistory implements Command{
-    private static List<String> history = new ArrayList<String>();
+    private static List<String> history = new ArrayList<>();
 
     public void addCommand(String name) {
         history.add(name);
