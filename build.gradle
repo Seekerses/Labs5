@@ -14,3 +14,10 @@ repositories {
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
+
+task getJar(type: Jar) {
+    archivesBaseName = 'gs-gradle'
+    manifest {
+        attributes 'Main-Class': 'Main'
+    }
+}
