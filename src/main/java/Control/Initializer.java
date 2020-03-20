@@ -37,8 +37,12 @@ public class Initializer {
         } catch (Exception e) {
             System.out.println("Содержимое файла содержит ошибку или к нему нет доступа, введите адрес файла :");
             try {
+                e.printStackTrace();
+                System.out.println(address);
                 BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-                init(table , reader.readLine());
+                String line = reader.readLine();
+                if(!"exit".equals(line)) init(table , line);
+                else System.exit(0);
             }
             catch (IOException ex){
                 e.printStackTrace();

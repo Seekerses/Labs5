@@ -10,7 +10,7 @@ public class Main {
             Initializer.init(prodTable, args[0]);
         }
         else {
-            Initializer.init(prodTable, "src\\saves\\saved.csv");
+            Initializer.init(prodTable, "..\\..\\..\\..\\build\\resources\\main\\saved.csv");
         }
         CommandController cmd = new CommandController();
         cmd.start(new CommandInterpreter());

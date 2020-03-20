@@ -18,7 +18,7 @@ public class CommandSave implements Command {
             TableController.getCurrentTable().save(args[0]);
         }
         else{
-            TableController.getCurrentTable().save("src\\saves\\saved.csv");
+            TableController.getCurrentTable().save("..\\..\\..\\..\\build\\resources\\main\\saved.csv");
         }
     }
 
