@@ -124,4 +124,8 @@ public class Product {
     public UnitOfMeasure getUnitOfMeasure() {
         return unitOfMeasure;
     }
+
+    public int compareTo(Product product) {
+        return id.intValue() - product.getId().intValue();
+    }
 }

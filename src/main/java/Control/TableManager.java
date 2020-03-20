@@ -5,10 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.Hashtable;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 //receiver
 
@@ -85,9 +82,13 @@ public class TableManager {
         FileOutputStream fos = new FileOutputStream(address);
         StringBuilder text= new StringBuilder();
         text.append(Date.toString()).append("\n");
+        Map<Long,String> map = new HashMap<>();
         for (Map.Entry<String, Product> entry : table.entrySet()) {
-
-            text.append(entry.getKey()).append(";").append(entry.getValue().out()).append("\n");
+            map.put(entry.getValue().getId(), entry.getKey());
+        }
+        Map<Long,String> sortedmap = new TreeMap<>(map);
+        for (Map.Entry<Long, String> entry : sortedmap.entrySet()) {
+            text.append(entry.getValue()).append(";").append(table.get(entry.getValue()).out()).append("\n");
         }
         try {
             BufferedOutputStream bos = new BufferedOutputStream(fos);
@@ -160,7 +161,7 @@ public class TableManager {
      * Returns Set of keys
      * @return Set of keys of Hashtable
      */
-    public Set<String> getkeySet() {
+    public Set<String> getKey() {
         return table.keySet();
     }
 
