@@ -14,7 +14,7 @@ import java.util.*;
 
 public class Commandgroup_counting_by_coordinates implements Command {
     @Override
-    public void execute(String[] args) throws IOException {
+    public void execute(String[] args) {
         List<Product> products = new ArrayList<>(TableController.getCurrentTable().getProducts());
         Map<String, Integer> map = new HashMap<>();
         for (Product p : products) {
