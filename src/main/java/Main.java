@@ -6,7 +6,12 @@ public class Main {
     public static void main(String[] args){
         TableManager prodTable = new TableManager("products");
         TableController.setCurrentTable(prodTable);
-        Initializer.init(prodTable,"C:\\projects\\kurs1\\Prog\\Labs5\\src\\main\\resources\\test.csv");
+        if(args.length != 0) {
+            Initializer.init(prodTable, args[0]);
+        }
+        else {
+            Initializer.init(prodTable, "src\\saves\\saved.csv");
+        }
         CommandController cmd = new CommandController();
         cmd.start(new CommandInterpreter());
         cmd.stop();
