@@ -2,17 +2,22 @@ package Control;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.PriorityQueue;
-import java.util.Queue;
 
-public class ScriptParcer {
-
+/**
+ * Class that parse the script files
+ */
+public class ScriptParser {
+    /**
+     * Creates a ArrayList of commands from script file and throws commands to interpreter
+     * @param file Script file
+     * @throws IOException If an I/O error occurs
+     */
     public static void parseScript(String file) throws IOException {
         FileReader reader = new FileReader(new File(file));
         BufferedReader buffReader = new BufferedReader(reader);
         String line;
         ArrayList<String[]> commands = new ArrayList<>();
-        CommandInterpretator itr = new CommandInterpretator();
+        CommandInterpreter itr = new CommandInterpreter();
 
         while ((line = buffReader.readLine()) != null){
             String[] cmd = line.split(" ");

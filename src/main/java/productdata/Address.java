@@ -1,12 +1,19 @@
 package productdata;
-import java.io.BufferedReader;
-import java.io.IOException;
 
+/**
+ * Class that represents a Adress data of Product
+ */
 public class Address {
     private String street; //Поле не может быть null
     private Location town; //Поле может быть null
 
-    public Address(String street, Location town) {
+    /**
+     * Standard constructor
+     * @param street Name of a street
+     * @param town Coordinates of Town
+     * @throws NullPointerException If you are trying to build a Address with a null street argument
+     */
+    public Address(String street, Location town) throws NullPointerException {
         if(street == null) throw new NullPointerException();
         this.street = street;
         this.town = town;

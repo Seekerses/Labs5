@@ -1,9 +1,6 @@
 package cmd;
 
-import Control.Initislizator;
 import Control.TableController;
-import Control.TableManager;
-import cmd.Command;
 import productdata.Product;
 import productdata.ReaderProductBuilder;
 

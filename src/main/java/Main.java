@@ -4,11 +4,11 @@ import Control.*;
 public class Main {
 
     public static void main(String[] args){
-        TableManager prodTable = new TableManager();
+        TableManager prodTable = new TableManager("products");
         TableController.setCurrentTable(prodTable);
-        Initislizator.init(prodTable,"C:\\Users\\seeke\\Desktop\\saved.csv");
+        Initializer.init(prodTable,"C:\\Users\\seeke\\Desktop\\saved.csv");
         CommandController cmd = new CommandController();
-        cmd.start(new CommandInterpretator());
+        cmd.start(new CommandInterpreter());
         cmd.stop();
     }
 }

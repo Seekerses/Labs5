@@ -8,7 +8,7 @@ public class CommandSave implements Command {
 
     @Override
     public void execute(String[] args) throws FileNotFoundException {
-        TableController.getCurrentTable().save();
+        TableController.getCurrentTable().save(args[0]);
     }
 
     public String toString(){

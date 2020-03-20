@@ -7,7 +7,13 @@ import cmd.*;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * This is Standard Command List that Interpretators uses in default case
+ */
 public class StdCommandList implements CommandList {
+    /**
+     * Map of added Commands
+     */
     private static Map<String, Command> commands;
 
     static {
@@ -44,10 +50,16 @@ public class StdCommandList implements CommandList {
         commands.put("filter_less_than_manufacturer", commandfilter_less_than_manufacturer);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public Map<String,Command> getCommands(){
         return commands;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public static void addCommand(String name, Command command){
         commands.put(name,command);
     }
