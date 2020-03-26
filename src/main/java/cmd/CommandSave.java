@@ -18,7 +18,7 @@ public class CommandSave implements Command {
             TableController.getCurrentTable().save(new File(args[0]));
         }
         else{
-            TableController.getCurrentTable().save(new File("saved.txt"));
+            TableController.getCurrentTable().save(new File("saved.csv"));
         }
     }
 
