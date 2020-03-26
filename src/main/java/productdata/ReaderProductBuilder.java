@@ -40,7 +40,7 @@ public class ReaderProductBuilder {
                     } catch (Exception e) {
                         System.out.println("Invalid value");
                     }
-                    if (price != null && price < 0f) {
+                    if (price != null && price < 0) {
                         System.out.println("Error: price cannot be negative. Enter price: ");
                         price = null;
                     }
@@ -116,7 +116,7 @@ public class ReaderProductBuilder {
     private static Coordinates buildCoordinates(BufferedReader reader){
         double x;
         Integer y = null;
-        System.out.println("Enter organization coordinates. Enter x coordinate:");
+        System.out.println("Enter product coordinates. Enter x coordinate:");
         while (true){
             try {
                 x = Double.parseDouble(reader.readLine());

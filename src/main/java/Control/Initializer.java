@@ -16,6 +16,12 @@ public class Initializer {
      */
     public static void init(TableManager table, File file){
         try {
+            if(!file.canRead()) throw new IllegalAccessException();
+            if(file.length() == 0){
+                table.setCreationDate(LocalDateTime.now());
+                System.out.println("Initializing complete...");
+                return;
+            }
             FileReader fileReader = new FileReader(file);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
 
@@ -33,8 +39,22 @@ public class Initializer {
             bufferedReader.close();
             System.out.println("Initializing complete...");
 
-        } catch (Exception e) {
-            System.out.println("Содержимое файла содержит ошибку или к нему нет доступа, введите адрес файла :");
+        }
+        catch (IllegalAccessException a) {
+            System.out.println("The file cannot be accessed, enter the file address:");
+            try {
+                a.printStackTrace();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+                String line = reader.readLine();
+                if(!"exit".equals(line)) init(table , new File(line));
+                else System.exit(0);
+            }
+            catch (IOException ex){
+                ex.printStackTrace();
+            }
+        }
+        catch (Exception e) {
+            System.out.println("The file contains an error, enter the file address:");
             try {
                 e.printStackTrace();
                 BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -43,7 +63,7 @@ public class Initializer {
                 else System.exit(0);
             }
             catch (IOException ex){
-                e.printStackTrace();
+                ex.printStackTrace();
             }
         }
     }

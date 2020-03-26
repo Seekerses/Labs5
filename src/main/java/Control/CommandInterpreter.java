@@ -43,7 +43,7 @@ public class CommandInterpreter implements Interpreter {
                 }
             }
             else {
-                System.out.println("Такой комманды не существует. Введите info чтобы узнать список доступных команд..");
+                System.out.println("There is no such command. Enter help to see a list of available commands ..");
             }
         }
 
