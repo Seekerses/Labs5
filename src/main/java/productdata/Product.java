@@ -34,7 +34,7 @@ public class Product {
             this.id = id;
         }
         if (name == null || coordinates == null || unitOfMeasure == null) throw new NullPointerException();
-        if (price < 0) throw new NegativePrice();
+        if (price != null && price < 0) throw new NegativePrice();
         this.name = name;
         this.price = price;
         this.coordinates = coordinates;
