@@ -12,11 +12,10 @@ public class Initializer {
     /**
      * This method fills the table with Product that creates using the csv file
      * @param table Table, which will filled
-     * @param address Address of csv file
+     * @param file csv File
      */
-    public static void init(TableManager table, String address){
+    public static void init(TableManager table, File file){
         try {
-            File file = new File(address);
             FileReader fileReader = new FileReader(file);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
 
@@ -38,10 +37,9 @@ public class Initializer {
             System.out.println("Содержимое файла содержит ошибку или к нему нет доступа, введите адрес файла :");
             try {
                 e.printStackTrace();
-                System.out.println(address);
                 BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
                 String line = reader.readLine();
-                if(!"exit".equals(line)) init(table , line);
+                if(!"exit".equals(line)) init(table , new File(line));
                 else System.exit(0);
             }
             catch (IOException ex){

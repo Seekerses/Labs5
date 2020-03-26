@@ -1,7 +1,7 @@
 package cmd;
 import Control.TableController;
-import Control.TableManager;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 
 /**
@@ -15,10 +15,10 @@ public class CommandSave implements Command {
     @Override
     public void execute(String[] args) throws FileNotFoundException {
         if(args != null) {
-            TableController.getCurrentTable().save(args[0]);
+            TableController.getCurrentTable().save(new File(args[0]));
         }
         else{
-            TableController.getCurrentTable().save("..\\..\\..\\..\\build\\resources\\main\\saved.csv");
+            TableController.getCurrentTable().save(new File("../saved.txt"));
         }
     }
 

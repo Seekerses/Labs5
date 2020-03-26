@@ -84,9 +84,9 @@ public class Organization {
 
     @Override
     public String toString(){
-        return ("ID организации: " + id + " имя организации: " + name
-                + " Полное имя: " + fullName + " Тип организации: " + (type == null ? "не указано" : type.toString())
-                + " Адресс организации " + (postalAddress == null ? "не указано" : postalAddress.toString()));
+        return ("ID : " + id + " Name: " + name
+                + " Full Name: " + fullName + " Type: " + (type == null ? "not indicated" : type.toString())
+                + " Address :" + (postalAddress == null ? "not indicated" : postalAddress.toString()));
     }
 
     @Override
