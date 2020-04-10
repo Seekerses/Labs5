@@ -29,6 +29,9 @@ public class CommandController {
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
             String line = reader.readLine();
             while (isOn){
+                if(line == null){
+                System.exit(0);
+            }
                 if(!"".equals(line)) {
                     interpreter.handle(line.split(" "));
                     System.out.println("\nEnter command:");
