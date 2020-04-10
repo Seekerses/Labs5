@@ -16,8 +16,10 @@ public class CommandSave implements Command {
     public void execute(String[] args) throws FileNotFoundException {
         if(args != null) {
             TableController.getCurrentTable().save(new File(args[0]));
+            System.out.println("Collection has been saved");
         }
         else{
+            System.out.println("Collection has been saved");
             TableController.getCurrentTable().save(new File("saved.csv"));
         }
     }

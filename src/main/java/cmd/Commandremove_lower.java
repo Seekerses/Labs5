@@ -27,6 +27,7 @@ public class Commandremove_lower implements Command{
             if (map.getValue().getId() < i) {
                 it.remove();//against ConcurrentModificationException
                 TableController.getCurrentTable().remove(map.getKey());
+                System.out.println("Elements with lower ID has been removed");
             }
         }
     }

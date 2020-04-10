@@ -22,10 +22,10 @@ public class CommandRemove implements Command {
             }
         }
         if(count==0){
-            System.out.println("Такого ключа нет.\nДоступные ключи: " + TableController.getCurrentTable().getKey());
+            System.out.println("No such key\nAvailable keys: " + TableController.getCurrentTable().getKey());
         }else{
             TableController.getCurrentTable().remove(args[0]);
-            System.out.println("Элемент успешно удален.");
+            System.out.println("Element has been removed.");
         }
     }
 
