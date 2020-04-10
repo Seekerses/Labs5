@@ -94,7 +94,7 @@ public class Initializer {
             Organization org;
             if(!"".equals(str[11])) {
                 try {
-                    org = new Organization(Integer.parseInt(str[5]), str[10], str[11], "".equals(str[12]) ? null : OrganizationType.valueOf(str[12]), adr);
+                    org = new Organization("".equals(str[5]) ? null : Integer.parseInt(str[5]), str[10], str[11], "".equals(str[12]) ? null : OrganizationType.valueOf(str[12]), adr);
                 }
                 catch (NotUniqueFullName e){
                     Organization comp = UniqueController.getOrgTable().get(str[11]);
@@ -105,7 +105,7 @@ public class Initializer {
                 }
             }
             else {org = null;}
-            product = new Product(Long.parseLong(str[1]),str[2], coord, str.length < 16 ? null : Float.parseFloat(str[15]), UnitOfMeasure.valueOf(str[13]), org , "".equals(str[14]) ? null: LocalDateTime.parse(str[14]));
+            product = new Product("".equals(str[1])? null:Long.parseLong(str[1]),str[2], coord, str.length < 16 ? null : Float.parseFloat(str[15]), UnitOfMeasure.valueOf(str[13]), org , "".equals(str[14]) ? null: LocalDateTime.parse(str[14]));
         }
         catch (Exception e){
             e.printStackTrace();

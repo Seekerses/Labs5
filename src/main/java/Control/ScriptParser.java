@@ -21,10 +21,20 @@ public class ScriptParser {
 
         while ((line = buffReader.readLine()) != null){
             String[] cmd = line.split(" ");
+            if(line.equals("execute_script " + file)){
+                System.out.println("Recursion detected.");
+                return;
+            }
+            for(int i =0;i<= cmd.length-1;i++){
+                if (";".equals(cmd[i])){
+                    cmd[i]="";
+                }
+
+            }
             commands.add(cmd);
         }
         for (String[] command : commands) {
-                itr.handle(command);
+            itr.handle(command);
         }
         buffReader.close();
     }
