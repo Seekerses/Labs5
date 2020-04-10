@@ -12,11 +12,16 @@ public class Initializer {
     /**
      * This method fills the table with Product that creates using the csv file
      * @param table Table, which will filled
-     * @param address Address of csv file
+     * @param file csv File
      */
-    public static void init(TableManager table, String address){
+    public static void init(TableManager table, File file) throws IllegalAccessException{
         try {
-            File file = new File(address);
+            if(file != null && !file.canRead()) throw new IllegalAccessException();
+            if( file == null || file.length() == 0){
+                table.setCreationDate(LocalDateTime.now());
+                System.out.println("Initializing complete...");
+                return;
+            }
             FileReader fileReader = new FileReader(file);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
 
@@ -34,14 +39,31 @@ public class Initializer {
             bufferedReader.close();
             System.out.println("Initializing complete...");
 
-        } catch (Exception e) {
-            System.out.println("Содержимое файла содержит ошибку или к нему нет доступа, введите адрес файла :");
+        }
+        catch (IllegalAccessException a) {
+            System.out.println("The file cannot be accessed, enter the file address:");
             try {
+                a.printStackTrace();
                 BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-                init(table , reader.readLine());
+                String line = reader.readLine();
+                if(!"exit".equals(line)) init(table , new File(line));
+                else System.exit(0);
             }
             catch (IOException ex){
+                ex.printStackTrace();
+            }
+        }
+        catch (Exception e) {
+            System.out.println("The file contains an error, enter the file address:");
+            try {
                 e.printStackTrace();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+                String line = reader.readLine();
+                if(!"exit".equals(line)) init(table , new File(line));
+                else System.exit(0);
+            }
+            catch (IOException ex){
+                ex.printStackTrace();
             }
         }
     }
@@ -54,43 +76,50 @@ public class Initializer {
      */
     public static Product build(TableManager table, String[] str){
         Location location;
-        if (!"".equals(str[7] +  str[9])){
-            location = new Location(Long.parseLong(str[7]),"".equals(str[8])? 0 : Integer.parseInt(str[8]), Long.parseLong(str[9]));
-        }
-        else{
-            location = null;
-        }
-        Address adr;
-        if (!"".equals(str[6])) {
-            adr = new Address(str[6], location);
-        } else {
-             adr = null;
-        }
-        Product product = null;
         try {
-            Coordinates coord = new Coordinates("".equals(str[3]) ? 0 : Double.parseDouble(str[3]), Integer.parseInt(str[4]));
-            Organization org;
-            if(!"".equals(str[11])) {
-                try {
-                    org = new Organization(Integer.parseInt(str[5]), str[10], str[11], "".equals(str[12]) ? null : OrganizationType.valueOf(str[12]), adr);
-                }
-                catch (NotUniqueFullName e){
-                    Organization comp = UniqueController.getOrgTable().get(str[11]);
-                    if(comp.getPostalAddress().equals(adr) && comp.getName().equals(str[10])
-                            && comp.getType().equals("".equals(str[12]) ? null : OrganizationType.valueOf(str[12])))
-                        org = comp;
-                    else throw new NotUniqueFullName();
-                }
+            if (!"".equals(str[7] + str[9])) {
+                location = new Location(Long.parseLong(str[7]), "".equals(str[8]) ? 0 : Integer.parseInt(str[8]), Long.parseLong(str[9]));
+            } else {
+                location = null;
             }
-            else {org = null;}
-            product = new Product(Long.parseLong(str[1]),str[2], coord, str.length < 16 ? null : Float.parseFloat(str[15]), UnitOfMeasure.valueOf(str[13]), org , "".equals(str[14]) ? null: LocalDateTime.parse(str[14]));
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
+            Address adr;
+            if (!"".equals(str[6])) {
+                adr = new Address(str[6], location);
+            } else {
+                adr = null;
+            }
+            Product product = null;
+            try {
+                Coordinates coord = new Coordinates("".equals(str[3]) ? 0 : Double.parseDouble(str[3]), Integer.parseInt(str[4]));
+                Organization org;
+                if (!"".equals(str[11])) {
+                    try {
+                        org = new Organization("".equals(str[5]) ? null : Integer.parseInt(str[5]), str[10], str[11], "".equals(str[12]) ? null : OrganizationType.valueOf(str[12]), adr);
+                    } catch (NotUniqueFullName e) {
+                        Organization comp = UniqueController.getOrgTable().get(str[11]);
+                        if (comp.getPostalAddress().equals(adr) && comp.getName().equals(str[10])
+                                && comp.getType().equals("".equals(str[12]) ? null : OrganizationType.valueOf(str[12])))
+                            org = comp;
+                        else throw new NotUniqueFullName();
+                    }
+                } else {
+                    org = null;
+                }
+                product = new Product("".equals(str[1]) ? null : Long.parseLong(str[1]), str[2], coord, str.length < 16 ? null : Float.parseFloat(str[15]), UnitOfMeasure.valueOf(str[13]), org, "".equals(str[14]) ? null : LocalDateTime.parse(str[14]));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
         if (product != null) {
             table.put(str[0], product);
         }
         return product;
+        }
+        catch (Exception e){
+            System.out.println("Wrong arguments. Argument should be in format \"key productId productName xCoordinate yCoordinate organizationId" +
+                    "orgStreet xOrgCoordinate yOrgCoordinate zOrgCoordinate organizationName organizationFullName orgType UnitsOfMeasure creationDate price\"" +
+                    "to create null value use ;. In files separator is \";\" instead of \" \" and null value is \"\".");
+        return null;
+    }
     }
 }

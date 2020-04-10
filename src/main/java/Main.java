@@ -1,19 +1,35 @@
 import Control.*;
 
+import java.io.*;
+
 
 public class Main {
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws IllegalAccessException {
         TableManager prodTable = new TableManager("products");
         TableController.setCurrentTable(prodTable);
+        try {
+            if( new File("saved.csv").createNewFile()){
+                System.out.println("Save file created.");
+            }
+        }
+        catch (Exception e ){
+            System.out.println("Could not create default save file, please please specify it manually\n");
+        }
         if(args.length != 0) {
-            Initializer.init(prodTable, args[0]);
+            Initializer.init(prodTable,new File(args[0]));
         }
         else {
-            Initializer.init(prodTable, "src\\saves\\saved.csv");
-        }
+            try {
+                Initializer.init(prodTable, new File("saved.csv").exists() ? new File("saved.csv") : null);
+            }
+            catch (IllegalAccessException |NullPointerException e){
+                Initializer.init(prodTable, null);
+            }
         CommandController cmd = new CommandController();
+        System.out.println("Enter Command:");
         cmd.start(new CommandInterpreter());
         cmd.stop();
     }
+}
 }

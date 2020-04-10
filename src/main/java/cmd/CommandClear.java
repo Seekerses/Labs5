@@ -14,7 +14,12 @@ public class CommandClear implements Command {
 
     @Override
     public void execute(String[] args) {
-        TableController.getCurrentTable().clear();
+        if(TableController.getCurrentTable().getSize()==0){
+            System.out.println("Collection is empty already.");
+        } else{
+            TableController.getCurrentTable().clear();
+            System.out.println("Collection has been cleared.");
+        }
     }
 
     /**

@@ -65,4 +65,8 @@ public class StdCommandList implements CommandList {
     public static void addCommand(String name, Command command){
         commands.put(name,command);
     }
+
+    public static Command getCommand(String key){
+        return commands.get(key);
+    }
 }

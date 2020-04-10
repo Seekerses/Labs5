@@ -34,7 +34,7 @@ public class Product {
             this.id = id;
         }
         if (name == null || coordinates == null || unitOfMeasure == null) throw new NullPointerException();
-        if (price < 0) throw new NegativePrice();
+        if (price != null && price < 0) throw new NegativePrice();
         this.name = name;
         this.price = price;
         this.coordinates = coordinates;
@@ -71,10 +71,10 @@ public class Product {
 
     @Override
     public String toString() {
-        return ("ID продукта: " + id + " \nProduct name: " + name + " \nКоординаты продукта: "
-                + coordinates.toString() + " \nДата создания : " + creationDate.toString()
-                + " \nЦена продукта : " + (price == null ? "не указано":price.toString())+ " \nЕдиницы измерения : "
-                + unitOfMeasure.toString() + " \nПроизводит : " + (manufacturer == null ? "не указано" : manufacturer.toString()));
+        return ("ID : " + id + " \nProduct name: " + name + " \nCoordinates: "
+                + coordinates.toString() + " \nCreation date : " + creationDate.toString()
+                + " \nPrice : " + (price == null ? "not indicated":price.toString())+ " \nUnits of measure : "
+                + unitOfMeasure.toString() + " \nManufactured by : " + (manufacturer == null ? "not indicated" : manufacturer.toString()));
     }
 
     /**

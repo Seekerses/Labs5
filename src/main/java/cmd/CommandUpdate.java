@@ -37,7 +37,7 @@ public class CommandUpdate implements Command {
             }
         }
         if(counter==0){
-            System.out.println("Элемента с данным id не существует. Повторите ввод: ");
+            System.out.println("There is no elements with that id.");
         }
     }
 

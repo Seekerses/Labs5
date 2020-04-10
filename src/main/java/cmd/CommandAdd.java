@@ -23,7 +23,7 @@ public class CommandAdd implements Command{
     @Override
     public void execute(String[] args) {
         if (args == null) {
-            System.out.println(" Ведите ключ продукта : ");
+            System.out.println(" Enter product key: ");
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
             try {
                 TableController.getCurrentTable().put(reader.readLine(), ReaderProductBuilder.buildProduct(reader));
@@ -34,6 +34,7 @@ public class CommandAdd implements Command{
         }
         else{
             Initializer.build(TableController.getCurrentTable(),args);
+            System.out.println("Insertion complete...");
         }
     }
 

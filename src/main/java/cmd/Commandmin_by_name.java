@@ -31,7 +31,7 @@ public class Commandmin_by_name implements Command {
         }
         if(p!=null){
             System.out.println(p.toString());
-        }else{System.out.println("Empty table!");}
+        }else{System.out.println("Empty table");}
     }
 
     /**

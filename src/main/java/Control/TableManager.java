@@ -1,9 +1,7 @@
 package Control;
 import productdata.Product;
-import java.io.BufferedOutputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+
+import java.io.*;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -75,11 +73,11 @@ public class TableManager {
 
     /**
      * Saves the table to the file
-     * @param address Address of file
+     * @param file Save to this file
      * @throws FileNotFoundException IF something went wrong
      */
-    public void save(String address) throws FileNotFoundException {
-        FileOutputStream fos = new FileOutputStream(address);
+    public void save(File file) throws FileNotFoundException {
+        FileOutputStream fos = new FileOutputStream(file);
         StringBuilder text= new StringBuilder();
         text.append(Date.toString()).append("\n");
         Map<Long,String> map = new HashMap<>();

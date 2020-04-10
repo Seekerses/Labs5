@@ -29,7 +29,7 @@ public class Commandgroup_counting_by_coordinates implements Command {
             }
         }
         for (Map.Entry<String, Integer> m : map.entrySet()) {
-            System.out.println("По координатам: " + m.getKey() + " находится " + m.getValue() + " продукта(ов).");
+            System.out.println("By coordinates: " + m.getKey() + " locate " + m.getValue() + " products.");
         }
     }
 

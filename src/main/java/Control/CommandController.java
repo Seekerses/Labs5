@@ -29,7 +29,13 @@ public class CommandController {
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
             String line = reader.readLine();
             while (isOn){
-                interpreter.handle(line.split(" "));
+                if(line == null){
+                System.exit(0);
+            }
+                if(!"".equals(line)) {
+                    interpreter.handle(line.split(" "));
+                    System.out.println("\nEnter command:");
+                }
                 line = reader.readLine();
             }
         }
