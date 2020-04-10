@@ -17,6 +17,7 @@ public class CommandInfo implements Command {
         System.out.println("Size of collection: " + TableController.getCurrentTable().getSize() + "\n"
         + "Type of collection: " + TableController.getCurrentTable().getType() + "\n" +
                 "Date of creation: " + TableController.getCurrentTable().getCreationDate().toString());
+        System.out.println("Command complete...");
 
     }
 

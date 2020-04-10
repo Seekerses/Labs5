@@ -46,6 +46,9 @@ public class CommandInterpreter implements Interpreter {
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
+                catch (NullPointerException e){
+                    System.out.println("Wrong arguments...");
+                }
             }
             else {
                 System.out.println("There is no such command. Enter help to see a list of available commands ..");
