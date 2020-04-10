@@ -32,7 +32,7 @@ public class Commandfilter_less_than_manufacturer implements Command {
             }
         }
         if(counter==0){
-            System.out.println("Таких элементов нет. Попробуйте снова: ");
+            System.out.println("No such elements.");
         }
     }
 

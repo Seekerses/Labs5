@@ -15,6 +15,7 @@ public class CommandClear implements Command {
     @Override
     public void execute(String[] args) {
         TableController.getCurrentTable().clear();
+        System.out.println("Collection has been cleared.");
     }
 
     /**
