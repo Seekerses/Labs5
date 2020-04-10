@@ -14,10 +14,10 @@ public class Initializer {
      * @param table Table, which will filled
      * @param file csv File
      */
-    public static void init(TableManager table, File file){
+    public static void init(TableManager table, File file) throws IllegalAccessException{
         try {
-            if(!file.canRead()) throw new IllegalAccessException();
-            if(file.length() == 0){
+            if(file != null && !file.canRead()) throw new IllegalAccessException();
+            if( file == null || file.length() == 0){
                 table.setCreationDate(LocalDateTime.now());
                 System.out.println("Initializing complete...");
                 return;
