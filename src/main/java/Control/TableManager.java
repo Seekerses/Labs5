@@ -77,26 +77,30 @@ public class TableManager {
      * @throws FileNotFoundException IF something went wrong
      */
     public void save(File file) throws FileNotFoundException {
-        FileOutputStream fos = new FileOutputStream(file);
-        StringBuilder text= new StringBuilder();
-        text.append(Date.toString()).append("\n");
-        Map<Long,String> map = new HashMap<>();
-        for (Map.Entry<String, Product> entry : table.entrySet()) {
-            map.put(entry.getValue().getId(), entry.getKey());
-        }
-        Map<Long,String> sortedmap = new TreeMap<>(map);
-        for (Map.Entry<Long, String> entry : sortedmap.entrySet()) {
-            text.append(entry.getValue()).append(";").append(table.get(entry.getValue()).out()).append("\n");
-        }
         try {
-            BufferedOutputStream bos = new BufferedOutputStream(fos);
-            byte[] buffer = text.toString().getBytes();
-            bos.write(buffer, 0, buffer.length);
-            bos.flush();
-            bos.close();
-            System.out.println("Save complete...");
-        } catch(IOException e) {
-            System.out.println(e.getMessage());
+            FileOutputStream fos = new FileOutputStream(file);
+            StringBuilder text = new StringBuilder();
+            text.append(Date.toString()).append("\n");
+            Map<Long, String> map = new HashMap<>();
+            for (Map.Entry<String, Product> entry : table.entrySet()) {
+                map.put(entry.getValue().getId(), entry.getKey());
+            }
+            Map<Long, String> sortedmap = new TreeMap<>(map);
+            for (Map.Entry<Long, String> entry : sortedmap.entrySet()) {
+                text.append(entry.getValue()).append(";").append(table.get(entry.getValue()).out()).append("\n");
+            }
+            try {
+                BufferedOutputStream bos = new BufferedOutputStream(fos);
+                byte[] buffer = text.toString().getBytes();
+                bos.write(buffer, 0, buffer.length);
+                bos.flush();
+                bos.close();
+                System.out.println("Save complete...");
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
+        }catch (NullPointerException e){
+            System.out.println("The directory has an error.");
         }
     }
 
