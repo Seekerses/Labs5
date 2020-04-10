@@ -27,7 +27,8 @@ public class Main {
                 Initializer.init(prodTable, null);
             }
         CommandController cmd = new CommandController();
-        System.out.println("Enter Command:");
+        System.out.println("Enter Command \n" +
+                "or Help to display a list of commands:");
         cmd.start(new CommandInterpreter());
         cmd.stop();
     }
