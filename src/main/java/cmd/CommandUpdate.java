@@ -25,6 +25,10 @@ public class CommandUpdate implements Command {
 
     @Override
     public void execute(String[] args) {
+        if(args[0] == null){
+            System.out.println("Please enter ID");
+        }
+
         int counter = 0;
         Iterator<Map.Entry<String, Product>> it = TableController.getCurrentTable().getSet().iterator();
         int i = Integer.parseInt(args[0]);
@@ -49,6 +53,6 @@ public class CommandUpdate implements Command {
 
     @Override
     public String toString() {
-        return "update";
+        return "update_id";
     }
 }
