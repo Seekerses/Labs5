@@ -36,7 +36,12 @@ public class CommandInterpreter implements Interpreter {
                         arguments = new ArrayList<>(Arrays.asList(args));
                         arguments.remove(0);
                     } else arguments = null;
-
+                    if (arguments != null) for (int i=0;i<= arguments.size()-1;i++) {
+                        if (";".equals(arguments.get(i))){
+                            arguments.remove(i);
+                            arguments.add(i,"");
+                        }
+                    }
                     cmdList.getCommands().get(args[0]).execute(arguments == null ? null : arguments.toArray(new String[0]));
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();

@@ -34,6 +34,7 @@ public class CommandAdd implements Command{
         }
         else{
             Initializer.build(TableController.getCurrentTable(),args);
+            System.out.println("Insertion complete...");
         }
     }
 
