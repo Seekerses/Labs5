@@ -23,6 +23,7 @@ public class Main {
             Initializer.init(prodTable, new File("saved.csv").exists() ? new File("saved.csv") : null);
         }
         CommandController cmd = new CommandController();
+        System.out.println("Enter Command:");
         cmd.start(new CommandInterpreter());
         cmd.stop();
     }
