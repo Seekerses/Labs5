@@ -10,7 +10,7 @@ public class CommandExit implements Command {
 
     @Override
     public void execute(String[] args){
-        System.out.println("Program completion");
+        System.out.println("Program completion...");
         System.exit(0);
     }
 
