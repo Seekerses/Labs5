@@ -16,12 +16,14 @@ public class Initializer {
      */
     public static void init(TableManager table, File file) {
         try {
-            if(file != null && !file.canRead()) throw new IllegalAccessException();
+            if(file != null && !file.canRead() && !file.canExecute()) throw new IllegalAccessException();
+
             if( file == null || file.length() == 0){
                 table.setCreationDate(LocalDateTime.now());
                 System.out.println("Initializing complete...");
                 return;
             }
+
             FileReader fileReader = new FileReader(file);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
 
