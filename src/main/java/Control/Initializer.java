@@ -14,7 +14,7 @@ public class Initializer {
      * @param table Table, which will filled
      * @param file csv File
      */
-    public static void init(TableManager table, File file) throws IllegalAccessException{
+    public static void init(TableManager table, File file) {
         try {
             if(file != null && !file.canRead()) throw new IllegalAccessException();
             if( file == null || file.length() == 0){
@@ -41,30 +41,30 @@ public class Initializer {
 
         }
         catch (IllegalAccessException a) {
-            System.out.println("The file cannot be accessed, enter the file address:");
-            try {
-                a.printStackTrace();
-                BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-                String line = reader.readLine();
-                if(!"exit".equals(line)) init(table , new File(line));
-                else System.exit(0);
-            }
-            catch (IOException ex){
-                ex.printStackTrace();
-            }
+            System.out.println("The file cannot be accessed, enter the available file address, or type \"null\" to create new empty table:");
+            changeAddress(table);
         }
         catch (Exception e) {
-            System.out.println("The file contains an error, enter the file address:");
-            try {
-                e.printStackTrace();
-                BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-                String line = reader.readLine();
-                if(!"exit".equals(line)) init(table , new File(line));
-                else System.exit(0);
-            }
-            catch (IOException ex){
-                ex.printStackTrace();
-            }
+            System.out.println("The file contains an error or it have wrong format, enter the correct file address:");
+            changeAddress(table);
+        }
+    }
+
+    /**
+     * Method that response for changing file address if source file contents problems
+     * @param table Table that connected to file
+     */
+    private static void changeAddress(TableManager table) {
+        try {
+            System.out.println("(Enter \"exit\" to exit)");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            String line = reader.readLine();
+            if("null".equals(line)) init(table , null);
+            if(!"exit".equals(line)) init(table , new File(line));
+            else System.exit(0);
+        }
+        catch (IOException ex){
+            ex.printStackTrace();
         }
     }
 
@@ -118,7 +118,7 @@ public class Initializer {
         catch (Exception e){
             System.out.println("Wrong arguments. Argument should be in format \"key productId productName xCoordinate yCoordinate organizationId" +
                     "orgStreet xOrgCoordinate yOrgCoordinate zOrgCoordinate organizationName organizationFullName orgType UnitsOfMeasure creationDate price\"" +
-                    "to create null value use ;. In files separator is \";\" instead of \" \" and null value is \"\".");
+                    "to create null value use ;. In files separator is \";\" instead of \" \" and null value is \"\". Unformatted product will be ignored.");
         return null;
     }
     }

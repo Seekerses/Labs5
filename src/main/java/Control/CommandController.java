@@ -3,6 +3,7 @@ package Control;
 import cmd.CommandHistory;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
@@ -39,8 +40,8 @@ public class CommandController {
                 line = reader.readLine();
             }
         }
-        catch (Exception e){
-            e.printStackTrace();
+        catch (IOException e){
+            System.out.println("Invalid symbol sequence, enter correct command or enter help to get a list of commands...");
         }
     }
 

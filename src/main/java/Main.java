@@ -17,17 +17,19 @@ public class Main {
             System.out.println("Could not create default save file, please please specify it manually\n");
         }
         if(args.length != 0) {
-            Initializer.init(prodTable,new File(args[0]));
+            //check extension
+            Initializer.init(prodTable, new File(args[0]));
         }
         else {
             try {
                 Initializer.init(prodTable, new File("saved.csv").exists() ? new File("saved.csv") : null);
             }
-            catch (IllegalAccessException |NullPointerException e){
+            catch (NullPointerException e){
                 Initializer.init(prodTable, null);
             }
         CommandController cmd = new CommandController();
-        System.out.println("Enter Command:");
+        System.out.println("Enter Command \n" +
+                "or Help to display a list of commands:");
         cmd.start(new CommandInterpreter());
         cmd.stop();
     }

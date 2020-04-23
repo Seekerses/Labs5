@@ -121,9 +121,7 @@ public class ReaderProductBuilder {
             try {
                 x = Double.parseDouble(reader.readLine());
                 break;
-            } catch (NumberFormatException e) {
-                System.out.println("Error: invalid value.");
-            } catch (IOException e) {
+            } catch (NumberFormatException | IOException e) {
                 System.out.println("Error: invalid value.");
             }
         }
@@ -276,9 +274,7 @@ public class ReaderProductBuilder {
                 try {
                     y = Integer.parseInt(reader.readLine());
                     break;
-                } catch (NumberFormatException e) {
-                    System.out.println("Error: invalid value.");
-                } catch (IOException e) {
+                } catch (NumberFormatException | IOException e) {
                     System.out.println("Error: invalid value.");
                 }
             }
