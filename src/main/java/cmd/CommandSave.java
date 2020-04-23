@@ -17,9 +17,10 @@ public class CommandSave implements Command {
     public void execute(String[] args) {
         if(args != null) {
             try {
-                if(!new File(args[0]).exists()){
+                File saveFile = new File(args[0]);
+                if(saveFile.exists()){
                     try {
-                        if ((new File(args[0]).createNewFile())) {
+                        if ((saveFile.createNewFile())) {
                             System.out.println("Save file created");
                         } else {
                             System.out.println("Can`t create file.");
@@ -27,12 +28,17 @@ public class CommandSave implements Command {
                         }
                     }
                     catch (IOException e){
-                        System.out.println("Illegal Access, try to save with another path.");
+                        System.out.println("Illegal access, get the right access or try to save with another path.");
                         return;
                     }
                 }
-                TableController.getCurrentTable().save(new File(args[0]));
-                System.out.println("Collection has been saved");
+                if (saveFile.canWrite()) {
+                    TableController.getCurrentTable().save(new File(args[0]));
+                    System.out.println("Collection has been saved");
+                }
+                else {
+                    System.out.println("Can`t write in this file, get the right access...");
+                }
             }
             catch (FileNotFoundException e){
                 System.out.println("File not found. Try another path.");
@@ -40,12 +46,13 @@ public class CommandSave implements Command {
         }
         else{
             try {
-                if(!new File("saved.csv").exists()){
+                File saved = new File("saved.csv");
+                if(!saved.exists()){
                     try {
-                        if ((new File("saved.csv").createNewFile())) {
+                        if ((saved.createNewFile())) {
                             System.out.println("Save file created");
                         } else {
-                            System.out.println("Can`t create file.");
+                            System.out.println("Can`t create save file.");
                             return;
                         }
                     }
@@ -54,8 +61,13 @@ public class CommandSave implements Command {
                         return;
                     }
                 }
-                TableController.getCurrentTable().save(new File("saved.csv"));
-                System.out.println("Collection has been saved");
+                if (saved.canWrite()) {
+                    TableController.getCurrentTable().save(new File("saved.csv"));
+                    System.out.println("Collection has been saved");
+                }
+                else{
+                    System.out.println("Can`t write in default file, get the right access...");
+                }
             }
             catch (FileNotFoundException e){
                 System.out.println("Default save file not found. Try to specify path.");

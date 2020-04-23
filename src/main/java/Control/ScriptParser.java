@@ -16,6 +16,7 @@ public class ScriptParser {
      */
     public static void parseScript(String file) throws IOException {
         try {
+            if (!new File(file).canRead()) throw new IllegalAccessException();
             FileReader reader = new FileReader(new File(file));
             BufferedReader buffReader = new BufferedReader(reader);
             String line;
@@ -56,6 +57,9 @@ public class ScriptParser {
             }
             buffReader.close();
         } catch (FileNotFoundException e) {
+            System.out.println("File not found...");
+        }
+        catch (IllegalAccessException e){
             System.out.println("Cannot access the file, please get access rights...");
         }
     }

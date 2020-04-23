@@ -5,7 +5,7 @@ import java.io.*;
 
 public class Main {
 
-    public static void main(String[] args) throws IllegalAccessException {
+    public static void main(String[] args) {
         TableManager prodTable = new TableManager("products");
         TableController.setCurrentTable(prodTable);
         try {
@@ -14,7 +14,7 @@ public class Main {
             }
         }
         catch (Exception e ){
-            System.out.println("Could not create default save file, please please specify it manually\n");
+            System.out.println("Could not create default save file, please specify it manually\n");
         }
         if(args.length != 0) {
             //check extension
@@ -23,15 +23,14 @@ public class Main {
         else {
             try {
                 Initializer.init(prodTable, new File("saved.csv").exists() ? new File("saved.csv") : null);
-            }
-            catch (NullPointerException e){
+            } catch (NullPointerException e) {
                 Initializer.init(prodTable, null);
             }
+        }
         CommandController cmd = new CommandController();
         System.out.println("Enter Command \n" +
                 "or Help to display a list of commands:");
         cmd.start(new CommandInterpreter());
         cmd.stop();
     }
-}
 }
