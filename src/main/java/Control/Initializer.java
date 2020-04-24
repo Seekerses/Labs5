@@ -83,7 +83,9 @@ public class Initializer {
             else System.exit(0);
         }
         catch (IOException ex){
-            ex.printStackTrace();
+            System.out.println("Invalid character sequence.");
+            System.out.println("Enter valid address (Enter \"exit\" to exit):");
+            changeAddress(table);
         }
     }
 
@@ -95,15 +97,23 @@ public class Initializer {
      */
     public static Product build(TableManager table, String[] str){
         if (str.length < 15){
-            String[] temp = Arrays.copyOfRange(str,0,1);
-            String[] temp2 = Arrays.copyOfRange(str,1,4);
-            String[] temp3 = Arrays.copyOfRange(str,4,14);
-            ArrayList<String> un = new ArrayList<>(Arrays.asList(temp));
-            un.add("");
-            un.addAll(Arrays.asList(temp2));
-            un.add("");
-            un.addAll(Arrays.asList(temp3));
-            str = un.toArray(new String[0]);
+            try {
+                String[] temp = Arrays.copyOfRange(str, 0, 1);
+                String[] temp2 = Arrays.copyOfRange(str, 1, 4);
+                String[] temp3 = Arrays.copyOfRange(str, 4, 14);
+                ArrayList<String> un = new ArrayList<>(Arrays.asList(temp));
+                un.add("");
+                un.addAll(Arrays.asList(temp2));
+                un.add("");
+                un.addAll(Arrays.asList(temp3));
+                str = un.toArray(new String[0]);
+            }
+            catch (Exception e){
+                System.out.println("Wrong arguments. Argument should be in format \"key productName xCoordinate yCoordinate " +
+                        "orgStreet xOrgCoordinate yOrgCoordinate zOrgCoordinate organizationName organizationFullName orgType UnitsOfMeasure creationDate price\"" +
+                        "to create null value use ;. In files separator is \";\" instead of \" \" and null value is \"\". Unformatted product will be ignored.");
+                return null;
+            }
         }
         Location location;
         try {
