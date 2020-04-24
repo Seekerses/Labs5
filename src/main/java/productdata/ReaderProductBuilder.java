@@ -121,7 +121,7 @@ public class ReaderProductBuilder {
             try {
                 x = Double.parseDouble(reader.readLine());
                 break;
-            } catch (NumberFormatException | IOException e) {
+            } catch (NumberFormatException | IOException | NullPointerException e) {
                 System.out.println("Error: invalid value.");
             }
         }
@@ -194,7 +194,7 @@ public class ReaderProductBuilder {
                     while(type == null) {
                         try {
                             type = OrganizationType.valueOf(reader.readLine().toUpperCase());
-                        } catch (IllegalArgumentException e) {
+                        } catch (IllegalArgumentException | NullPointerException e) {
                             System.out.println(" Invalid value.");
                             type = null;
                         }
@@ -264,7 +264,7 @@ public class ReaderProductBuilder {
                 try {
                     x = Long.parseLong(reader.readLine());
                 }
-                catch (NumberFormatException e){
+                catch (NumberFormatException | NullPointerException e){
                     System.out.println("Error: invalid value. Enter the x coordinate:");
                     x = null;
                 }
@@ -274,7 +274,7 @@ public class ReaderProductBuilder {
                 try {
                     y = Integer.parseInt(reader.readLine());
                     break;
-                } catch (NumberFormatException | IOException e) {
+                } catch (NumberFormatException | IOException | NullPointerException e) {
                     System.out.println("Error: invalid value.");
                 }
             }
@@ -284,7 +284,7 @@ public class ReaderProductBuilder {
                 try {
                     z = Long.parseLong(reader.readLine());
                 }
-                catch (NumberFormatException e){
+                catch (NumberFormatException | NullPointerException e){
                     System.out.println("Error: invalid value. Enter z coordinate:");
                     z = null;
                 }

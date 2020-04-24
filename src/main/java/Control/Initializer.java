@@ -140,8 +140,13 @@ public class Initializer {
                 e.printStackTrace();
             }
 
-        if (product != null) {
-            table.put(str[0], product);
+        if (product != null ) {
+            try {
+                table.put(str[0], product);
+            }
+            catch (NullPointerException e){
+                System.out.println("Key is null, please try again with valid key...");
+            }
         }
         return product;
         }

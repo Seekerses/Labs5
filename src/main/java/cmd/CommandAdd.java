@@ -23,13 +23,18 @@ public class CommandAdd implements Command{
     @Override
     public void execute(String[] args) {
         if (args == null) {
-            System.out.println(" Enter product key: ");
+            String key;
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
             try {
-                TableController.getCurrentTable().put(reader.readLine(), ReaderProductBuilder.buildProduct(reader));
+                do {
+                    System.out.println(" Enter product key: ");
+                    key = reader.readLine();
+                    if (key == null) System.out.println("Error: null key.");
+                } while (key == null);
+                TableController.getCurrentTable().put(key, ReaderProductBuilder.buildProduct(reader));
                 System.out.println("Insertion complete...");
             } catch (Exception e) {
-                e.printStackTrace();
+                System.out.println("Key is null, please try again with valid key...");
             }
         }
         else{

@@ -18,7 +18,7 @@ public class CommandSave implements Command {
         if(args != null) {
             try {
                 File saveFile = new File(args[0]);
-                if(saveFile.exists()){
+                if(!saveFile.exists()){
                     try {
                         if ((saveFile.createNewFile())) {
                             System.out.println("Save file created");
