@@ -1,4 +1,5 @@
 package productdata;
+import Control.TableController;
 import Exceptions.NegativePrice;
 import java.time.LocalDateTime;
 
@@ -127,5 +128,9 @@ public class Product {
 
     public int compareTo(Product product) {
         return id.intValue() - product.getId().intValue();
+    }
+
+    public static  void setIdCounter(int value){
+        idCounter = value;
     }
 }

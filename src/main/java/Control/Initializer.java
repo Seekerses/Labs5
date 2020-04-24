@@ -1,6 +1,8 @@
 package Control;
 import java.io.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import Exceptions.NotUniqueFullName;
 import productdata.*;
@@ -16,18 +18,32 @@ public class Initializer {
      */
     public static void init(TableManager table, File file) {
         try {
-            if(file != null && !file.canRead() && !file.canExecute()) throw new IllegalAccessException();
-
+            if(file != null && !file.canRead()) throw new IllegalAccessException();
             if( file == null || file.length() == 0){
                 table.setCreationDate(LocalDateTime.now());
                 System.out.println("Initializing complete...");
                 return;
             }
-
             FileReader fileReader = new FileReader(file);
+            String line;
             BufferedReader bufferedReader = new BufferedReader(fileReader);
-
-            String line = bufferedReader.readLine();
+            int maxIDpr = 1;
+            int maxIDorg = 1;
+            while ((line = bufferedReader.readLine()) != null) {
+                if(line.split(";").length >1){
+                    if(Integer.parseInt(line.split(";")[1]) > maxIDpr){
+                        maxIDpr =Integer.parseInt(line.split(";")[1]);
+                    }
+                    if (!line.split(";")[5].equals("") && Integer.parseInt(line.split(";")[5]) > maxIDorg){
+                        maxIDorg = Integer.parseInt(line.split(";")[5]);
+                    }
+                }
+            }
+            fileReader = new FileReader(file);
+            bufferedReader = new BufferedReader(fileReader);
+            Product.setIdCounter(maxIDpr);
+            Organization.setOrgId(maxIDorg);
+            line = bufferedReader.readLine();
             if (line.contains(";")){
                 table.setCreationDate(LocalDateTime.now());
                 build(table,line.split(";"));
@@ -35,6 +51,7 @@ public class Initializer {
             else {
                 table.setCreationDate("".equals(line) ? LocalDateTime.now() : LocalDateTime.parse(line));
             }
+
             while ((line = bufferedReader.readLine()) != null) {
                 build(table,line.split(";"));
             }
@@ -77,6 +94,17 @@ public class Initializer {
      * @return Built Product
      */
     public static Product build(TableManager table, String[] str){
+        if (str.length < 15){
+            String[] temp = Arrays.copyOfRange(str,0,1);
+            String[] temp2 = Arrays.copyOfRange(str,1,4);
+            String[] temp3 = Arrays.copyOfRange(str,4,14);
+            ArrayList<String> un = new ArrayList<>(Arrays.asList(temp));
+            un.add("");
+            un.addAll(Arrays.asList(temp2));
+            un.add("");
+            un.addAll(Arrays.asList(temp3));
+            str = un.toArray(new String[0]);
+        }
         Location location;
         try {
             if (!"".equals(str[7] + str[9])) {
@@ -118,7 +146,7 @@ public class Initializer {
         return product;
         }
         catch (Exception e){
-            System.out.println("Wrong arguments. Argument should be in format \"key productId productName xCoordinate yCoordinate organizationId" +
+            System.out.println("Wrong arguments. Argument should be in format \"key productName xCoordinate yCoordinate " +
                     "orgStreet xOrgCoordinate yOrgCoordinate zOrgCoordinate organizationName organizationFullName orgType UnitsOfMeasure creationDate price\"" +
                     "to create null value use ;. In files separator is \";\" instead of \" \" and null value is \"\". Unformatted product will be ignored.");
         return null;

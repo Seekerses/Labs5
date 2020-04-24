@@ -99,4 +99,8 @@ public class Organization {
         }
         else return false;
     }
+
+    public static void setOrgId(int value){
+        orgId = value;
+    }
 }
